@@ -55,13 +55,19 @@ The application structure presented in this boilerplate is **fractal**, where fu
 ```
 .
 ├── bin                      # Build/Start scripts
-├── build                    # All build-related configuration
-│   └── webpack              # Environment-specific configuration files for webpack
+├── build                    # All build-related files
 ├── config                   # Project configuration settings
+│   └── webpack              # Environment-specific configuration files for webpack
+├── node_modules             # 3rd-party libraries and utilities
+├── public                   # Static files such as favicon.ico etc
+│   ├── dist                 # The folder for compiled output
+│   ├── favicon.ico          # Application icon to be displayed in bookmarks
+│   ├── robots.txt           # Instructions for search engine crawlers
+│   └── ...                  # etc
 ├── server                   # Koa application (uses webpack middleware)
 │   └── main.js              # Server application entry point
 ├── src                      # Application source code
-│   ├── main.js              # Application bootstrap and rendering
+│   ├── index.js             # React application entry point
 │   ├── components           # Reusable Presentational Components
 │   ├── containers           # Reusable Container Components
 │   ├── layouts              # Components that dictate major page structure
@@ -79,7 +85,11 @@ The application structure presented in this boilerplate is **fractal**, where fu
 │           ├── container    # Connect components to actions and store
 │           ├── modules      # Collections of reducers/constants/actions
 │           └── routes **    # Fractal sub-routes (** optional)
-└── tests                    # Unit tests
+│── test                     # Unit and integration tests
+│── Gulpfile.js              # Gulp automation script
+│── package.json             # The list of project dependencies and NPM scripts
+│── routes.json              # This list of application routes
+└── README.md                # Unit and integration tests
 ```
 
 ## Development
