@@ -19,7 +19,7 @@ const config = {
   trackingID: 'UA-XXXXX-Y',                 // Google Analytics Site's ID
 };
 
-const tasks = new Map(); // The collection of automation tasks ('clean', 'build', 'publish', etc.)
+const tasks = new Map(); // The collection of automation tasks ('clean', 'copy', 'build', 'publish', etc.)
 
 function run(task) {
   const start = new Date();
@@ -34,10 +34,26 @@ function run(task) {
 //
 // Clean up the output directory
 // -----------------------------------------------------------------------------
-tasks.set('clean', () => del([path.join(__dirname, '../build/dist/*'), path.join(__dirname, '!../build/dist/.git')], { dot: true }));
+tasks.set('clean', () => del([path.join(__dirname, '../build/*'), path.join(__dirname, '!../build/dist/.git')], { dot: true }));
+
+/**
+ * Copy static files into the /build folder
+ */
+tasks.set('copy', () => {
+  const ncp = require('ncp').ncp;
+  ncp.limit = 16;
+  return new Promise((resolve, reject) => {
+    ncp(path.join(__dirname, '../src/public/'), path.join(__dirname, '../build/'), (err) => {
+      if (err) {
+        reject({ stack: err });
+      }
+      resolve();
+    });
+  });
+});
 
 //
-// Copy ./index.html into the /public folder
+// Copy ./index.html into the /build folder
 // -----------------------------------------------------------------------------
 tasks.set('html', () => {
   const webpackConfig = require('../config/webpack.config');
@@ -83,6 +99,7 @@ tasks.set('bundle', () => {
 // -----------------------------------------------------------------------------
 tasks.set('build', () => Promise.resolve()
   .then(() => run('clean'))
+  .then(() => run('copy'))
   .then(() => run('bundle'))
   .then(() => run('html'))
   .then(() => run('sitemap'))
