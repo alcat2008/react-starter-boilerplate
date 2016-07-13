@@ -56,35 +56,26 @@ The application structure presented in this boilerplate is **fractal**, where fu
 .
 ├── bin                      # Build/Start scripts
 ├── build                    # All build-related files
+│   └── dist                 # The folder for compiled output
 ├── config                   # Project configuration settings
 │   └── webpack              # Environment-specific configuration files for webpack
 ├── node_modules             # 3rd-party libraries and utilities
-├── public                   # Static files such as favicon.ico etc
-│   ├── dist                 # The folder for compiled output
-│   ├── favicon.ico          # Application icon to be displayed in bookmarks
-│   ├── robots.txt           # Instructions for search engine crawlers
-│   └── ...                  # etc
 ├── server                   # Koa application (uses webpack middleware)
 │   └── main.js              # Server application entry point
 ├── src                      # Application source code
 │   ├── index.js             # React application entry point
 │   ├── components           # Reusable Presentational Components
 │   ├── containers           # Reusable Container Components
-│   ├── layouts              # Components that dictate major page structure
-│   ├── static               # Static assets (not imported anywhere in source code)
+│   │── public               # Static files such as favicon.ico etc
+│   │   ├── favicon.ico      # Application icon to be displayed in bookmarks
+│   │   ├── robots.txt       # Instructions for search engine crawlers
+│   │   └── ...              # etc
 │   ├── styles               # Application-wide styles (generally settings)
 │   ├── store                # Redux-specific pieces
 │   │   ├── createStore.js   # Create and instrument redux store
 │   │   └── reducers.js      # Reducer registry and injection
-│   └── routes               # Main route definitions and async split points
-│       ├── index.js         # Bootstrap main application routes with store
-│       └── Home             # Fractal route
-│           ├── index.js     # Route definitions and async split points
-│           ├── assets       # Assets required to render components
-│           ├── components   # Presentational React Components
-│           ├── container    # Connect components to actions and store
-│           ├── modules      # Collections of reducers/constants/actions
-│           └── routes **    # Fractal sub-routes (** optional)
+│   ├── routes               # Main route definitions and async split points
+│   └── views                # Html templates
 │── test                     # Unit and integration tests
 │── Gulpfile.js              # Gulp automation script
 │── package.json             # The list of project dependencies and NPM scripts
