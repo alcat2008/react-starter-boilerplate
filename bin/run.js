@@ -10,7 +10,6 @@ const browserSync = require('browser-sync');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 
-const webpackConfig = require('../config/webpack.config');
 
 // TODO: Update configuration settings
 const config = {
@@ -26,10 +25,10 @@ function run(task) {
   const start = new Date();
   console.log(`Starting '${task}'...`);
   return Promise.resolve()
-      .then(() => tasks.get(task)())
-      .then(() => {
-        console.log(`Finished '${task}' after ${new Date().getTime() - start.getTime()}ms`);
-      }, err => console.error(err.stack));
+    .then(() => tasks.get(task)())
+    .then(() => {
+      console.log(`Finished '${task}' after ${new Date().getTime() - start.getTime()}ms`);
+    }, err => console.error(err.stack));
 }
 
 //
@@ -41,6 +40,7 @@ tasks.set('clean', () => del([path.join(__dirname, '../build/dist/*'), path.join
 // Copy ./index.html into the /public folder
 // -----------------------------------------------------------------------------
 tasks.set('html', () => {
+  const webpackConfig = require('../config/webpack.config');
   const assets = JSON.parse(fs.readFileSync(path.join(__dirname, '../build/dist/assets.json'), 'utf8'));
   const template = fs.readFileSync(path.join(__dirname, '../src/public/index.ejs'), 'utf8');
   const render = ejs.compile(template, { filename: path.join(__dirname, '../src/public/index.ejs') });
@@ -52,7 +52,7 @@ tasks.set('html', () => {
 // Generate sitemap.xml
 // -----------------------------------------------------------------------------
 tasks.set('sitemap', () => {
-  const urls = require('../routes.json')
+  const urls = require('../src/routes.json')
     .filter(x => !x.path.includes(':'))
     .map(x => ({ loc: x.path }));
   const template = fs.readFileSync(path.join(__dirname, '../src/public/sitemap.ejs'), 'utf8');
@@ -65,6 +65,7 @@ tasks.set('sitemap', () => {
 // Bundle JavaScript, CSS and image files with Webpack
 // -----------------------------------------------------------------------------
 tasks.set('bundle', () => {
+  const webpackConfig = require('../config/webpack.config');
   return new Promise((resolve, reject) => {
     webpack(webpackConfig).run((err, stats) => {
       if (err) {
@@ -110,6 +111,7 @@ tasks.set('start', () => {
   const render = ejs.compile(template, { filename: path.join(__dirname, '../src/public/index.ejs') });
   const output = render({ debug: true, bundle: './dist/main.js', config });
   fs.writeFileSync(path.join(__dirname, '../build/index.html'), output, 'utf8');
+  const webpackConfig = require('../config/webpack.config');
   const bundler = webpack(webpackConfig);
   return new Promise(resolve => {
     browserSync({
