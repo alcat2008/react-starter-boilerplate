@@ -1,6 +1,7 @@
 
 /* eslint-disable */
 
+const path = require('path');
 const fs = require('fs');
 const del = require('del');
 const ejs = require('ejs');
@@ -34,30 +35,30 @@ function run(task) {
 //
 // Clean up the output directory
 // -----------------------------------------------------------------------------
-tasks.set('clean', () => del(['build/dist/*', '!build/dist/.git'], { dot: true }));
+tasks.set('clean', () => del([path.join(__dirname, '../build/dist/*'), path.join(__dirname, '!../build/dist/.git')], { dot: true }));
 
 //
 // Copy ./index.html into the /public folder
 // -----------------------------------------------------------------------------
 tasks.set('html', () => {
-  const assets = JSON.parse(fs.readFileSync('./build/dist/assets.json', 'utf8'));
-  const template = fs.readFileSync('./src/public/index.ejs', 'utf8');
-  const render = ejs.compile(template, { filename: './src/public/index.ejs' });
+  const assets = JSON.parse(fs.readFileSync(path.join(__dirname, '../build/dist/assets.json'), 'utf8'));
+  const template = fs.readFileSync(path.join(__dirname, '../src/public/index.ejs'), 'utf8');
+  const render = ejs.compile(template, { filename: path.join(__dirname, '../src/public/index.ejs') });
   const output = render({ debug: webpackConfig.debug, bundle: assets.main.js, config });
-  fs.writeFileSync('./build/index.html', output, 'utf8');
+  fs.writeFileSync(path.join(__dirname, '../build/index.html'), output, 'utf8');
 });
 
 //
 // Generate sitemap.xml
 // -----------------------------------------------------------------------------
 tasks.set('sitemap', () => {
-  const urls = require('./src/public/routes.json')
+  const urls = require('../routes.json')
     .filter(x => !x.path.includes(':'))
     .map(x => ({ loc: x.path }));
-  const template = fs.readFileSync('./src/public/sitemap.ejs', 'utf8');
-  const render = ejs.compile(template, { filename: './src/public/sitemap.ejs' });
+  const template = fs.readFileSync(path.join(__dirname, '../src/public/sitemap.ejs'), 'utf8');
+  const render = ejs.compile(template, { filename: path.join(__dirname, '../src/public/sitemap.ejs') });
   const output = render({ config, urls });
-  fs.writeFileSync('./build/sitemap.xml', output, 'utf8');
+  fs.writeFileSync(path.join(__dirname, '../build/sitemap.xml'), output, 'utf8');
 });
 
 //
@@ -105,15 +106,15 @@ tasks.set('publish', () => {
 // -----------------------------------------------------------------------------
 tasks.set('start', () => {
   global.HMR = !process.argv.includes('--no-hmr'); // Hot Module Replacement (HMR)
-  const template = fs.readFileSync('./src/public/index.ejs', 'utf8');
-  const render = ejs.compile(template, { filename: './src/public/index.ejs' });
-  const output = render({ debug: true, bundle: './build/dist/main.js', config });
-  fs.writeFileSync('./build/index.html', output, 'utf8');
+  const template = fs.readFileSync(path.join(__dirname, '../src/public/index.ejs'), 'utf8');
+  const render = ejs.compile(template, { filename: path.join(__dirname, '../src/public/index.ejs') });
+  const output = render({ debug: true, bundle: './dist/main.js', config });
+  fs.writeFileSync(path.join(__dirname, '../build/index.html'), output, 'utf8');
   const bundler = webpack(webpackConfig);
   return new Promise(resolve => {
     browserSync({
       server: {
-        baseDir: 'public',
+        baseDir: 'build',
 
         middleware: [
           webpackDevMiddleware(bundler, {
@@ -144,8 +145,8 @@ tasks.set('start', () => {
       // no need to watch '*.js' here, webpack will take care of it for us,
       // including full page reloads if HMR won't work
       files: [
-        'src/**/*.css',
-        'src/**/*.html',
+        path.join(__dirname, '../src/**/*.css'),
+        path.join(__dirname, '../src/**/*.html'),
       ],
     });
 

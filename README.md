@@ -64,6 +64,7 @@ The application structure presented in this boilerplate is **fractal**, where fu
 │   └── main.js              # Server application entry point
 ├── src                      # Application source code
 │   ├── index.js             # React application entry point
+│   ├── routes.json          # This list of application routes
 │   ├── components           # Reusable Presentational Components
 │   ├── containers           # Reusable Container Components
 │   │── public               # Static files such as favicon.ico etc
@@ -79,7 +80,6 @@ The application structure presented in this boilerplate is **fractal**, where fu
 │── test                     # Unit and integration tests
 │── Gulpfile.js              # Gulp automation script
 │── package.json             # The list of project dependencies and NPM scripts
-│── routes.json              # This list of application routes
 └── README.md                # Unit and integration tests
 ```
 
