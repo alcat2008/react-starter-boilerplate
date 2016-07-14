@@ -111,8 +111,8 @@ const config = {
       {
         test: /\.css/,
         loaders: [
-          // 'style-loader',
-          'isomorphic-style-loader',
+          'style-loader',
+          // 'isomorphic-style-loader',
           `css-loader?${JSON.stringify({
             sourceMap: isDebug,
             // CSS Modules https://github.com/css-modules/css-modules
