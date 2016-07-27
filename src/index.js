@@ -21,3 +21,7 @@ initComponent();
 // and the firing of a click event on mobile browsers
 // https://github.com/ftlabs/fastclick
 FastClick.attach(document.body);
+
+if (module.hot) {
+  module.hot.accept();
+}
