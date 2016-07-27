@@ -2,7 +2,6 @@
 /* eslint-disable global-require */
 
 const path = require('path');
-const extend = require('extend');
 const webpack = require('webpack');
 const AssetsPlugin = require('assets-webpack-plugin');
 
@@ -47,7 +46,8 @@ const config = {
 
   // Developer tool to enhance debugging, source maps
   // http://webpack.github.io/docs/configuration.html#devtool
-  devtool: isDebug ? 'source-map' : false,
+  // devtool: isDebug ? 'source-map' : false,
+  devtool: isDebug ? 'cheap-module-eval-source-map' : false,
 
   // What information should be printed to the console
   stats: {
@@ -123,24 +123,6 @@ const config = {
           })}`,
           'postcss-loader?pack=default',
         ],
-      },
-      {
-        test: /\.json$/,
-        exclude: [
-          path.resolve(__dirname, '../src/routes.json'),
-        ],
-        loader: 'json-loader',
-      },
-      {
-        test: /\.json$/,
-        include: [
-          path.resolve(__dirname, '../src/routes.json'),
-        ],
-        loader: path.resolve(__dirname, '../utils/routes-loader.js'),
-      },
-      {
-        test: /\.md$/,
-        loader: path.resolve(__dirname, '../utils/markdown-loader.js'),
       },
       {
         test: /\.(png|jpg|jpeg|gif|svg|woff|woff2)$/,

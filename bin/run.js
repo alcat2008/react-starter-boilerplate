@@ -14,7 +14,7 @@ const webpackHotMiddleware = require('webpack-hot-middleware');
 // TODO: Update configuration settings
 const config = {
   title: 'React Starter Boilerplate',       // Your website title
-  url: 'https://rsb.kriasoft.com',          // Your website URL
+  url: 'https://www.xxx.com',          // Your website URL
   project: 'react-starter-boilerplate',     // Firebase project. See README.md -> How to Deploy
   trackingID: 'UA-XXXXX-Y',                 // Google Analytics Site's ID
 };
@@ -65,19 +65,6 @@ tasks.set('html', () => {
 });
 
 //
-// Generate sitemap.xml
-// -----------------------------------------------------------------------------
-tasks.set('sitemap', () => {
-  const urls = require('../src/routes.json')
-    .filter(x => !x.path.includes(':'))
-    .map(x => ({ loc: x.path }));
-  const template = fs.readFileSync(path.join(__dirname, '../src/views/sitemap.ejs'), 'utf8');
-  const render = ejs.compile(template, { filename: path.join(__dirname, '../src/views/sitemap.ejs') });
-  const output = render({ config, urls });
-  fs.writeFileSync(path.join(__dirname, '../build/sitemap.xml'), output, 'utf8');
-});
-
-//
 // Bundle JavaScript, CSS and image files with Webpack
 // -----------------------------------------------------------------------------
 tasks.set('bundle', () => {
@@ -102,7 +89,6 @@ tasks.set('build', () => Promise.resolve()
   .then(() => run('copy'))
   .then(() => run('bundle'))
   .then(() => run('html'))
-  .then(() => run('sitemap'))
 );
 
 //
