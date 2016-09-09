@@ -6,11 +6,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import FastClick from 'fastclick';
 
-import Hello from './pages/Hello.jsx';
+import AppContainer from './containers';
 
-function initComponent(component) {
+function initComponent() {
   ReactDOM.render(
-    <Hello />,
+    <AppContainer />, // eslint-disable-line
     document.getElementById('root')
   );
 }

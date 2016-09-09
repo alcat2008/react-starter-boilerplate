@@ -11,7 +11,14 @@
     "react": "^15.2.1",
     "react-dom": "^15.2.1",
     "react-redux": "^4.4.5",
+    "react-router": "^2.7.0",
+    "react-router-redux": "^4.0.5",
     "redux": "^3.5.2",
+    "redux-actions": "^0.12.0",
+    "redux-logger": "^2.6.1",
+    "redux-promise": "^0.5.3",
+    "redux-thunk": "^2.1.0",
+    "remote-redux-devtools": "^0.4.8",
     "whatwg-fetch": "^1.0.0"
   },
   "devDependencies": {
@@ -81,8 +88,6 @@
     }
   },
   "scripts": {
-    "gulp-dev": "gulp watch",
-    "gulp-publish": "gulp --type production",
     "eslint": "eslint ./src",
     "stylelint": "stylelint \"src/styles/*.css\"",
     "lint": "npm run eslint && npm run stylelint",
