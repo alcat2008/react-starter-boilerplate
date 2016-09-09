@@ -13,7 +13,9 @@ export default function App({ children }) {
         {' '}
         <Link to="/foo">Foo</Link>
         {' '}
-        <Link to="/bar">Bar</Link>
+        <Link to="/page1">Page 1</Link>
+        {' '}
+        <Link to="/page2">Page 2</Link>
       </header>
       <div>
         <button onClick={() => browserHistory.push('/foo')}>Go to /foo</button>

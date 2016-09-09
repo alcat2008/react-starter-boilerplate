@@ -10,7 +10,7 @@ import configureStore from '../store/configureStore';
 // import { setLayout } from '../actions/device';
 // import { initApp } from '../actions/global';
 
-import { App, Home, Foo, Bar } from '../components';
+import { App, Home, Foo, SubPage, NoMatch } from '../components';
 
 
 const setup = () => {
@@ -26,7 +26,8 @@ const setup = () => {
             <Route path="/" component={App}>
               <IndexRoute component={Home} />
               <Route path="foo" component={Foo} />
-              <Route path="bar" component={Bar} />
+              <Route path="page:index" component={SubPage} />
+              <Route path="*" component={NoMatch} />
             </Route>
           </Router>
         </div>
