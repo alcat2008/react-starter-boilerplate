@@ -2,6 +2,14 @@ import expect from 'expect';
 import reducer from '../../src/reducers/count';
 
 describe('count reducer', () => {
+  let originReducer;
+
+  before(() => {
+    originReducer = {
+      number: 5,
+    };
+  });
+
   it('should return the initial state', () => {
     const expectedReducer = {
       number: 1,
@@ -14,11 +22,19 @@ describe('count reducer', () => {
       type: 'INCREASE',
       payload: 3,
     };
-    const originReducer = {
-      number: 1,
+    const expectedReducer = {
+      number: 8,
+    };
+    expect(reducer(originReducer, action)).toEqual(expectedReducer);
+  });
+
+  it('should decrease', () => {
+    const action = {
+      type: 'DECREASE',
+      payload: 3,
     };
     const expectedReducer = {
-      number: 4,
+      number: 2,
     };
     expect(reducer(originReducer, action)).toEqual(expectedReducer);
   });
