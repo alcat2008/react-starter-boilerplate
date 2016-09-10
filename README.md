@@ -58,29 +58,32 @@ The application structure presented in this boilerplate is **fractal**, where fu
 ├── build                    # All build-related files
 │   └── dist                 # The folder for compiled output
 ├── config                   # Project configuration settings
-│   └── webpack              # Environment-specific configuration files for webpack
+│   └── webpack.config.js    # Environment-specific configuration files for webpack
 ├── node_modules             # 3rd-party libraries and utilities
 ├── server                   # Koa application (uses webpack middleware)
 │   └── main.js              # Server application entry point
 ├── src                      # Application source code
 │   ├── index.js             # React application entry point
-│   ├── routes.json          # This list of application routes
+│   ├── actions              # This list of application actions
 │   ├── components           # Reusable Presentational Components
 │   ├── containers           # Reusable Container Components
 │   │── public               # Static files such as favicon.ico etc
 │   │   ├── favicon.ico      # Application icon to be displayed in bookmarks
 │   │   ├── robots.txt       # Instructions for search engine crawlers
 │   │   └── ...              # etc
-│   ├── styles               # Application-wide styles (generally settings)
+│   ├── reducers             # This list of application reducers
 │   ├── store                # Redux-specific pieces
-│   │   ├── createStore.js   # Create and instrument redux store
-│   │   └── reducers.js      # Reducer registry and injection
+│   │   └── configureStore.js# Create and instrument redux store
+│   ├── styles               # Application-wide styles (generally settings)
 │   ├── routes               # Main route definitions and async split points
 │   └── views                # Html templates
 │── test                     # Unit and integration tests
-│── Gulpfile.js              # Gulp automation script
+│── .editorconfig            # Defining coding styles
+│── .eslintignore            # Ignoring files and directories from linting
+│── .eslintrc                # Linting rules
+│── LICENSE.md               # License text
 │── package.json             # The list of project dependencies and NPM scripts
-└── README.md                # Unit and integration tests
+└── README.md                # Introductions to the project
 ```
 
 ## Development
