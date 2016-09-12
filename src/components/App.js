@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, browserHistory } from 'react-router';
 
-import styles from '../styles/hello.css';
+import '../styles/hello.less';
 
 export default function App({ children }) {
   return (
@@ -22,10 +22,10 @@ export default function App({ children }) {
       </div>
       <div style={{ marginTop: '1.5em' }}>{children}</div>
 
-      <div className={styles.content}>
+      <div className="content">
         <div>This starter boilerplate is build with React and Redux.</div>
       </div>
-      <div className={styles.footer}>
+      <div className="footer">
         <div>Created by FAS</div>
       </div>
     </div>

@@ -52,6 +52,8 @@
     "fs": "0.0.2",
     "highlight.js": "^9.5.0",
     "json-loader": "^0.5.4",
+    "less": "^2.7.1",
+    "less-loader": "^2.2.3",
     "markdown-it": "^7.0.0",
     "mocha": "^2.5.3",
     "ncp": "^2.0.0",
@@ -90,7 +92,7 @@
   },
   "scripts": {
     "eslint": "eslint ./src",
-    "stylelint": "stylelint \"src/styles/*.css\"",
+    "stylelint": "stylelint \"src/styles/*.less\"",
     "lint": "npm run eslint && npm run stylelint",
     "validate": "npm ls",
     "test": "mocha --compilers js:babel-register --recursive",

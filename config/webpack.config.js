@@ -125,6 +125,15 @@ const config = {
         ],
       },
       {
+        test: /\.less$/,
+        loaders: [
+          'style-loader',
+          `css-loader?${JSON.stringify({ sourceMap: isDebug, minimize: !isDebug })}`,
+          'postcss-loader?pack=less',
+          'less-loader',
+        ],
+      },
+      {
         test: /\.(png|jpg|jpeg|gif|svg|woff|woff2)$/,
         loader: 'url-loader?limit=10000',
       },
@@ -180,7 +189,7 @@ const config = {
         // https://github.com/postcss/autoprefixer
         require('autoprefixer')({browsers: AUTOPREFIXER_BROWSERS}),
       ],
-      sass: [
+      less: [
         require('autoprefixer')({browsers: AUTOPREFIXER_BROWSERS}),
       ],
     };
