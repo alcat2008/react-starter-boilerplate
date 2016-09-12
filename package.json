@@ -92,7 +92,7 @@
   },
   "scripts": {
     "eslint": "eslint ./src",
-    "stylelint": "stylelint \"src/styles/*.less\"",
+    "stylelint": "stylelint \"src/styles/*.less\" --syntax less",
     "lint": "npm run eslint && npm run stylelint",
     "validate": "npm ls",
     "test": "mocha --compilers js:babel-register --recursive",
