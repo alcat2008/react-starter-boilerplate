@@ -128,8 +128,16 @@ const config = {
         test: /\.less$/,
         loaders: [
           'style-loader',
-          `css-loader?${JSON.stringify({ sourceMap: isDebug, minimize: !isDebug })}`,
-          'postcss-loader?pack=less',
+          // 'isomorphic-style-loader',
+          `css-loader?${JSON.stringify({
+            sourceMap: isDebug,
+            // CSS Modules https://github.com/css-modules/css-modules
+            modules: true,
+            localIdentName: isDebug ? '[name]_[local]_[hash:base64:3]' : '[hash:base64:4]',
+            // CSS Nano http://cssnano.co/options/
+            minimize: !isDebug,
+          })}`,
+          'postcss-loader?pack=default',
           'less-loader',
         ],
       },
@@ -187,9 +195,6 @@ const config = {
         require('postcss-selector-not')(),
         // Add vendor prefixes to CSS rules using values from caniuse.com
         // https://github.com/postcss/autoprefixer
-        require('autoprefixer')({browsers: AUTOPREFIXER_BROWSERS}),
-      ],
-      less: [
         require('autoprefixer')({browsers: AUTOPREFIXER_BROWSERS}),
       ],
     };

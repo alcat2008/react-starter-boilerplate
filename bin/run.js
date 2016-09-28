@@ -147,7 +147,7 @@ tasks.set('start', () => {
         ],
       },
 
-      // no need to watch '*.js' here, webpack will take care of it for us,
+      // no need to watch '*.js' and '*.less' here, webpack will take care of it for us,
       // including full page reloads if HMR won't work
       files: [
         path.join(__dirname, '../src/**/*.css'),

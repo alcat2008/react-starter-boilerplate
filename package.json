@@ -6,6 +6,7 @@
   "license": "MIT",
   "dependencies": {
     "babel-polyfill": "^6.9.1",
+    "classnames": "^2.2.5",
     "fastclick": "^1.0.6",
     "history": "^3.0.0",
     "react": "^15.2.1",
@@ -80,7 +81,7 @@
     "stylelint": "^6.9.0",
     "stylelint-config-standard": "^10.0.0",
     "url-loader": "^0.5.7",
-    "webpack": "^1.13.1",
+    "webpack": "^1.13.2",
     "webpack-dev-middleware": "^1.6.1",
     "webpack-hot-middleware": "^2.12.1"
   },
@@ -93,7 +94,7 @@
   "scripts": {
     "eslint": "eslint ./src",
     "stylelint": "stylelint \"src/styles/*.less\" --syntax less",
-    "lint": "npm run eslint && npm run stylelint",
+    "lint": "npm run eslint",
     "validate": "npm ls",
     "test": "mocha --compilers js:babel-register --recursive",
     "test:watch": "mocha --compilers js:babel-register --reporter min --watch",

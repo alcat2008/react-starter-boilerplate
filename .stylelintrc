@@ -1,5 +1,14 @@
 {
   "extends": "stylelint-config-standard",
-  "rules": {}
+  "rules": {
+    "string-quotes": "double",
+    "number-leading-zero": "always",
+    "max-empty-lines": 2,
+    "at-rule-empty-line-before": [ "always", {
+      except: [ "blockless-group", "first-nested" ],
+      ignore: ["after-comment"],
+    } ],
+    "at-rule-name-space-after": "always",
+    "at-rule-no-unknown": false
+  }
 }
-

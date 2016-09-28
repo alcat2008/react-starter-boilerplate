@@ -1,33 +1,48 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Link, browserHistory } from 'react-router';
 
-import '../styles/hello.less';
+import classNames from 'classnames';
+import styles from '../styles/hello.less';
 
-export default function App({ children }) {
-  return (
-    <div>
-      <header>
-        Links:
-        {' '}
-        <Link to="/">Home</Link>
-        {' '}
-        <Link to="/foo">Foo</Link>
-        {' '}
-        <Link to="/page1">Page 1</Link>
-        {' '}
-        <Link to="/page2">Page 2</Link>
-      </header>
+// eslint-disable-next-line react/prefer-stateless-function
+class App extends React.Component {
+  render() {
+    const welcomeStyle = this.props.routing.locationBeforeTransitions.pathname !== '/' ? styles.content : styles.contentLegend;
+
+    return (
       <div>
-        <button onClick={() => browserHistory.push('/foo')}>Go to /foo</button>
-      </div>
-      <div style={{ marginTop: '1.5em' }}>{children}</div>
+        <header>
+          Links:
+          {' '}
+          <Link to="/">Home</Link>
+          {' '}
+          <Link to="/foo">Foo</Link>
+          {' '}
+          <Link to="/page1">Page 1</Link>
+          {' '}
+          <Link to="/page2">Page 2</Link>
+        </header>
+        <div>
+          <button onClick={() => browserHistory.push('/foo')}>Go to /foo</button>
+        </div>
+        <div style={{ marginTop: '1.5em' }}>{this.props.children}</div>
 
-      <div className="content">
-        <div>This starter boilerplate is build with React and Redux.</div>
+        <div className={classNames(welcomeStyle)}>
+          <div>This starter boilerplate is build with React and Redux.</div>
+        </div>
+        <div className={styles.footer}>
+          <div>Created by FAS</div>
+        </div>
       </div>
-      <div className="footer">
-        <div>Created by FAS</div>
-      </div>
-    </div>
-  );
+    );
+  }
 }
+
+
+// eslint-disable-next-line arrow-body-style
+const mapStateToProps = state => ({
+  routing: state.routing,
+});
+
+export default connect(mapStateToProps)(App);
