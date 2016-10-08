@@ -109,7 +109,8 @@ const config = {
         },
       },
       {
-        test: /\.css/,
+        test: /\.less$/,
+        include: path.resolve(__dirname, '../src/styles/views'),
         loaders: [
           'style-loader',
           // 'isomorphic-style-loader',
@@ -122,18 +123,17 @@ const config = {
             minimize: !isDebug,
           })}`,
           'postcss-loader?pack=default',
+          'less-loader',
         ],
       },
       {
         test: /\.less$/,
+        exclude: path.resolve(__dirname, '../src/styles/views'),
         loaders: [
           'style-loader',
           // 'isomorphic-style-loader',
           `css-loader?${JSON.stringify({
             sourceMap: isDebug,
-            // CSS Modules https://github.com/css-modules/css-modules
-            modules: true,
-            localIdentName: isDebug ? '[name]_[local]_[hash:base64:3]' : '[hash:base64:4]',
             // CSS Nano http://cssnano.co/options/
             minimize: !isDebug,
           })}`,

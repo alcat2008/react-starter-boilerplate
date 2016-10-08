@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import { Link, browserHistory } from 'react-router';
 
 import classNames from 'classnames';
-import styles from '../styles/hello.less';
+import styles from '../styles/views/hello.less';
+import '../styles/core/common.less';
 
 // eslint-disable-next-line react/prefer-stateless-function
 class App extends React.Component {
@@ -30,6 +31,9 @@ class App extends React.Component {
 
         <div className={classNames(welcomeStyle)}>
           <div>This starter boilerplate is build with React and Redux.</div>
+        </div>
+        <div className="global-footer">
+          <div>global-footer</div>
         </div>
         <div className={styles.footer}>
           <div>Created by FAS</div>
