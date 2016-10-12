@@ -16,6 +16,7 @@
     "mocha": true
   },
   "rules": {
+    "arrow-parens": ["error", "as-needed"],
     "arrow-body-style": ["warn", "as-needed", { "requireReturnForObjectLiteral": true }],
     "comma-dangle": ["warn", "only-multiline"],
     "global-require": ["warn"],
@@ -34,5 +35,6 @@
     "react/jsx-boolean-value": ["error", "always"],
     "react/jsx-pascal-case": ["warn", { ignore: [ ] }],
     "react/prop-types": ["warn", { ignore: ["children", "style", "params", "routing"] }],
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
   }
 }

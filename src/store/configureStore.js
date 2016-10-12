@@ -1,3 +1,4 @@
+/* eslint-disable import/newline-after-import */
 
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunkMiddleware from 'redux-thunk';
@@ -12,7 +13,7 @@ export default function configureStore(initialState, onComplete: ?() => void) {
   if (process.env.NODE_ENV === 'production') {
     finalCreateStore = applyMiddleware(...middleware)(createStore);
   } else {
-    /* eslint-disable global-require */
+    /* eslint-disable global-require, import/no-extraneous-dependencies */
     // const devTools = require('remote-redux-devtools');
     const createLogger = require('redux-logger');
     const loggerMiddleware = createLogger({ duration: true });

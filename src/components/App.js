@@ -9,7 +9,8 @@ import '../styles/core/common.less';
 // eslint-disable-next-line react/prefer-stateless-function
 class App extends React.Component {
   render() {
-    const welcomeStyle = this.props.routing.locationBeforeTransitions.pathname !== '/' ? styles.content : styles.contentLegend;
+    let welcomeStyle = styles.content;
+    if (this.props.routing.locationBeforeTransitions.pathname === '/') welcomeStyle = styles.contentLegend;
 
     return (
       <div>

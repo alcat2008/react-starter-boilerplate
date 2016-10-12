@@ -1,7 +1,6 @@
 import { combineReducers } from 'redux';
-import count from './count';
-
 import { routerReducer } from 'react-router-redux';
+import count from './count';
 
 export default combineReducers({
   count,
