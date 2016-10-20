@@ -20,7 +20,7 @@ const AUTOPREFIXER_BROWSERS = [
   'Safari >= 7.1',
 ];
 
-// Webpack configuration (main.js => public/dist/main.{hash}.js)
+// Webpack configuration (main.js => build/dist/main.{hash}.js)
 // http://webpack.github.io/docs/configuration.html
 const config = {
 
@@ -235,7 +235,7 @@ if (!isDebug) {
 
 // Hot Module Replacement (HMR) + React Hot Reload
 if (isDebug && useHMR) {
-  config.entry.unshift('react-hot-loader/patch', 'webpack-hot-middleware/client');
+  config.entry.unshift('react-hot-loader/patch');
   config.module.loaders.find(x => x.loader === 'babel-loader')
     .query.plugins.unshift('react-hot-loader/babel');
   config.plugins.push(new webpack.HotModuleReplacementPlugin());

@@ -7,6 +7,7 @@ const del = require('del');
 const ejs = require('ejs');
 const webpack = require('webpack');
 const browserSync = require('browser-sync');
+const webpackDevServer = require('webpack-dev-server');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 
@@ -120,52 +121,85 @@ tasks.set('run-dev', () => {
   const output = render({ debug: true, bundle: './dist/main.js', config });
   fs.writeFileSync(path.join(__dirname, '../build/index.html'), output, 'utf8');
   const webpackConfig = require('../config/webpack.config');
+  webpackConfig.entry.unshift("webpack-dev-server/client?http://127.0.0.1:3000/", "webpack/hot/dev-server");
   const bundler = webpack(webpackConfig);
   return new Promise(resolve => {
-    browserSync({
-      ghostMode: false,
+    // browserSync({
+    //   ghostMode: false,
+    //
+    //   snippetOptions: {
+    //     rule: {
+    //       match: /qqqqqqqqq/
+    //     }
+    //   },
+    //
+    //   server: {
+    //     baseDir: 'build',
+    //
+    //     middleware: [
+    //       webpackDevMiddleware(bundler, {
+    //         // IMPORTANT: dev middleware can't access config, so we should
+    //         // provide publicPath by ourselves
+    //         publicPath: webpackConfig.output.publicPath,
+    //
+    //         // pretty colored output
+    //         stats: webpackConfig.stats,
+    //
+    //         // for other settings see
+    //         // http://webpack.github.io/docs/webpack-dev-middleware.html
+    //       }),
+    //
+    //       // bundler should be the same as above
+    //       webpackHotMiddleware(bundler),
+    //
+    //       // Serve index.html for all unknown requests
+    //       (req, res, next) => {
+    //         if (req.headers.accept && req.headers.accept.startsWith('text/html')) {
+    //           req.url = '/index.html'; // eslint-disable-line no-param-reassign
+    //         }
+    //         next();
+    //       },
+    //     ],
+    //   },
+    //
+    //   // no need to watch '*.js' and '*.less' here, webpack will take care of it for us,
+    //   // including full page reloads if HMR won't work
+    //   files: [
+    //     path.join(__dirname, '../src/**/*.css'),
+    //     path.join(__dirname, '../src/**/*.html'),
+    //   ],
+    // });
 
-      snippetOptions: {
-        rule: {
-          match: /qqqqqqqqq/
-        }
-      },
+    var server = new webpackDevServer(bundler, {
+      // webpack-dev-server options
 
-      server: {
-        baseDir: 'build',
+      contentBase: "build",
+      // Can also be an array, or: contentBase: "http://localhost/",
 
-        middleware: [
-          webpackDevMiddleware(bundler, {
-            // IMPORTANT: dev middleware can't access config, so we should
-            // provide publicPath by ourselves
-            publicPath: webpackConfig.output.publicPath,
+      publicPath: webpackConfig.output.publicPath,
 
-            // pretty colored output
-            stats: webpackConfig.stats,
+      hot: true,
+      // Enable special support for Hot Module Replacement
+      // Page is no longer updated, but a "webpackHotUpdate" message is send to the content
+      // Use "webpack/hot/dev-server" as additional module in your entry point
+      // Note: this does _not_ add the `HotModuleReplacementPlugin` like the CLI option does.
 
-            // for other settings see
-            // http://webpack.github.io/docs/webpack-dev-middleware.html
-          }),
+      inline: true,
+      noInfo: false,
+      historyApiFallback: true,
 
-          // bundler should be the same as above
-          webpackHotMiddleware(bundler),
+      // pretty colored output
+      stats: webpackConfig.stats,
 
-          // Serve index.html for all unknown requests
-          (req, res, next) => {
-            if (req.headers.accept && req.headers.accept.startsWith('text/html')) {
-              req.url = '/index.html'; // eslint-disable-line no-param-reassign
-            }
-            next();
-          },
-        ],
-      },
+      // for other settings see
+      // http://webpack.github.io/docs/webpack-dev-middleware.html
+    });
 
-      // no need to watch '*.js' and '*.less' here, webpack will take care of it for us,
-      // including full page reloads if HMR won't work
-      files: [
-        path.join(__dirname, '../src/**/*.css'),
-        path.join(__dirname, '../src/**/*.html'),
-      ],
+    server.listen(3000, '127.0.0.1', function (err, result) {
+      if (err) {
+        console.log(err);
+      }
+      console.log('Listening at 127.0.0.1:3000');
     });
 
     resolve();
