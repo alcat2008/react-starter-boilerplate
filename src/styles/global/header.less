@@ -1,0 +1,32 @@
+
+#logo {
+  height: @header-height;
+  line-height: @header-height;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  color: @heading-color;
+}
+
+#nav {
+  //border: 0;
+  //float: right;
+  font-size: 14px;
+  font-family: Lato, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", SimSun, sans-serif;
+  //background-color: @heading-color;
+
+  li {
+    height: @header-height;
+    line-height: @header-height;
+    min-width: 72px;
+    text-align: center;
+    border-bottom-width: 3px;
+
+    &.mx-menu-item-selected a {
+      color: @link-active-color;
+      font-weight: bold;
+    }
+  }
+
+}

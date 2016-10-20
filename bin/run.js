@@ -108,7 +108,12 @@ tasks.set('publish', () => {
 //
 // Build website and launch it in a browser for testing (default)
 // -----------------------------------------------------------------------------
-tasks.set('start', () => {
+tasks.set('start', () => Promise.resolve()
+  .then(() => run('copy'))
+  .then(() => run('run-dev'))
+);
+
+tasks.set('run-dev', () => {
   global.HMR = !process.argv.includes('--no-hmr'); // Hot Module Replacement (HMR)
   const template = fs.readFileSync(path.join(__dirname, '../src/views/index.ejs'), 'utf8');
   const render = ejs.compile(template, { filename: path.join(__dirname, '../src/views/index.ejs') });
@@ -118,6 +123,14 @@ tasks.set('start', () => {
   const bundler = webpack(webpackConfig);
   return new Promise(resolve => {
     browserSync({
+      ghostMode: false,
+
+      snippetOptions: {
+        rule: {
+          match: /qqqqqqqqq/
+        }
+      },
+
       server: {
         baseDir: 'build',
 
@@ -139,7 +152,7 @@ tasks.set('start', () => {
 
           // Serve index.html for all unknown requests
           (req, res, next) => {
-            if (req.headers.accept.startsWith('text/html')) {
+            if (req.headers.accept && req.headers.accept.startsWith('text/html')) {
               req.url = '/index.html'; // eslint-disable-line no-param-reassign
             }
             next();
