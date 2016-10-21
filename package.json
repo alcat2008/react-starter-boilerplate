@@ -9,6 +9,7 @@
     "classnames": "^2.2.5",
     "fastclick": "^1.0.6",
     "history": "^3.0.0",
+    "lodash": "^4.16.4",
     "react": "^15.2.1",
     "react-dom": "^15.2.1",
     "react-redux": "^4.4.5",
@@ -75,7 +76,7 @@
     "postcss-selector-matches": "^2.0.1",
     "postcss-selector-not": "^2.0.0",
     "precommit-hook-eslint": "^3.0.0",
-    "react-hot-loader": "^3.0.0-beta.2",
+    "react-hot-loader": "^3.0.0-beta.6",
     "redux-logger": "^2.6.1",
     "remote-redux-devtools": "^0.4.8",
     "style-loader": "^0.13.1",
@@ -83,9 +84,7 @@
     "stylelint-config-standard": "^10.0.0",
     "url-loader": "^0.5.7",
     "webpack": "^1.13.2",
-    "webpack-dev-middleware": "^1.6.1",
-    "webpack-dev-server": "^1.16.2",
-    "webpack-hot-middleware": "^2.12.1"
+    "webpack-dev-server": "^1.16.2"
   },
   "stylelint": {
     "extends": "stylelint-config-standard",
@@ -106,7 +105,7 @@
     "build:debug": "node bin/run build --debug",
     "publish": "node bin/run publish",
     "publish:debug": "node bin/run publish --debug",
-    "start": "node bin/run"
+    "start": "node bin/run start && webpack-dev-server --hot --config config/webpack.config.dev.js"
   },
   "author": "ge_yangyang@126.com",
   "pre-commit": [
