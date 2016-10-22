@@ -105,7 +105,7 @@
     "build:debug": "node bin/run build --debug",
     "publish": "node bin/run publish",
     "publish:debug": "node bin/run publish --debug",
-    "start": "node bin/run start && webpack-dev-server --hot --config config/webpack.config.dev.js"
+    "start": "node bin/run start && open http://127.0.0.1:8080/ && webpack-dev-server --hot --config config/webpack.config.dev.js"
   },
   "author": "ge_yangyang@126.com",
   "pre-commit": [
