@@ -57,7 +57,7 @@ tasks.set('html', () => {
   const assets = JSON.parse(fs.readFileSync(path.join(__dirname, '../build/dist/assets.json'), 'utf8'));
   const template = fs.readFileSync(path.join(__dirname, '../src/views/index.ejs'), 'utf8');
   const render = ejs.compile(template, { filename: path.join(__dirname, '../src/views/index.ejs') });
-  const output = render({ debug: webpackConfig.debug, bundle: '.' + assets.main.js, config });
+  const output = render({ debug: webpackConfig.debug, bundle: assets.main.js, config });
   fs.writeFileSync(path.join(__dirname, '../build/index.html'), output, 'utf8');
 });
 
@@ -117,7 +117,7 @@ tasks.set('run-dev', () => {
   global.HMR = !process.argv.includes('--no-hmr'); // Hot Module Replacement (HMR)
   const template = fs.readFileSync(path.join(__dirname, '../src/views/index.ejs'), 'utf8');
   const render = ejs.compile(template, { filename: path.join(__dirname, '../src/views/index.ejs') });
-  const output = render({ debug: true, bundle: './dist/main.js', config });
+  const output = render({ debug: true, bundle: '/dist/main.js', config });
   fs.writeFileSync(path.join(__dirname, '../build/index.html'), output, 'utf8');
 
   return Promise.resolve();

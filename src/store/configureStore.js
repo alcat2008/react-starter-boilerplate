@@ -1,11 +1,13 @@
 /* eslint-disable import/newline-after-import */
 
 import { createStore, applyMiddleware, compose } from 'redux';
+import { browserHistory } from 'react-router';
+import { routerMiddleware } from 'react-router-redux';
 import thunkMiddleware from 'redux-thunk';
 import promiseMiddleware from 'redux-promise';
 
 import rootReducer from '../reducers';
-const middleware = [thunkMiddleware, promiseMiddleware];
+const middleware = [routerMiddleware(browserHistory), thunkMiddleware, promiseMiddleware];
 
 export default function configureStore(initialState, onComplete: ?() => void) {
   let finalCreateStore;

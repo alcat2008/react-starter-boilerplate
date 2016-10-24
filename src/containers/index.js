@@ -5,6 +5,7 @@ import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 
 import configureStore from '../store/configureStore';
+import analytics from '../actions/analytics';
 
 // import { setLayout } from '../actions/device';
 // import { initApp } from '../actions/global';
@@ -49,6 +50,8 @@ const setupWithRouteConfig = (store, history) => () => {
 const setup = () => {
   const store = configureStore({});
   const history = syncHistoryWithStore(browserHistory, store);
+
+  history.listen(location => analytics.track(location.pathname));
 
   // const AppContainer = setupWithComponents(store, history);
   const AppContainer = setupWithRouteConfig(store, history);
