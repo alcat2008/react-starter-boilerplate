@@ -1,4 +1,4 @@
-// import 'mxa/lib/style/index';
+// import 'antd/lib/style/index';
 
 import './index.less';
 
