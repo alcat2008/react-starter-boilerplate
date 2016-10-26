@@ -8,15 +8,11 @@ import 'antd/dist/antd.less';
 
 import configureStore from '../store/configureStore';
 import analytics from '../actions/analytics';
-
-// import { setLayout } from '../actions/device';
-// import { initApp } from '../actions/global';
 import routes from '../routes';
 
 const setup = () => {
   const store = configureStore({});
   const history = syncHistoryWithStore(browserHistory, store);
-
   history.listen(location => analytics.track(location.pathname));
 
   // const AppContainer = setupWithComponents(store, history);
