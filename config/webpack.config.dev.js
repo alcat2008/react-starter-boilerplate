@@ -1,260 +1,208 @@
+var path = require('path');
+var autoprefixer = require('autoprefixer');
+var webpack = require('webpack');
+var findCacheDir = require('find-cache-dir');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
+var CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
+var InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
+var WatchMissingNodeModulesPlugin = require('react-dev-utils/WatchMissingNodeModulesPlugin');
+var getClientEnvironment = require('./env');
+var paths = require('./paths');
 
-/* eslint-disable global-require */
+// Webpack uses `publicPath` to determine where the app is being served from.
+// In development, we always serve from the root. This makes config easier.
+var publicPath = '/';
+// `publicUrl` is just like `publicPath`, but we will provide it to our app
+// as %PUBLIC_URL% in `index.html` and `process.env.PUBLIC_URL` in JavaScript.
+// Omit trailing slash as %PUBLIC_PATH%/xyz looks better than %PUBLIC_PATH%xyz.
+var publicUrl = '';
+// Get environment variables to inject into our app.
+var env = getClientEnvironment(publicUrl);
 
-const path = require('path');
-const webpack = require('webpack');
-const AssetsPlugin = require('assets-webpack-plugin');
-
-const isDebug = true;
-const isVerbose = false;
-const useHMR = true;
-
-const AUTOPREFIXER_BROWSERS = [
-  'Android 2.3',
-  'Android >= 4',
-  'Chrome >= 35',
-  'Firefox >= 31',
-  'Explorer >= 9',
-  'iOS >= 7',
-  'Opera >= 12',
-  'Safari >= 7.1',
-];
-
-const STATS = {
-  colors: true,
-  reasons: isDebug,
-  hash: isVerbose,
-  version: isVerbose,
-  timings: true,
-  chunks: isVerbose,
-  chunkModules: isVerbose,
-  cached: isVerbose,
-  cachedAssets: isVerbose,
-};
-
-// Webpack configuration (main.js => build/dist/main.{hash}.js)
-// http://webpack.github.io/docs/configuration.html
-const config = {
-
-  // The base directory for resolving the entry option
-  context: __dirname,
-
-  // The entry point for the bundle
+// This is the development configuration.
+// It is focused on developer experience and fast rebuilds.
+// The production configuration is different and lives in a separate file.
+module.exports = {
+  // This makes the bundle appear split into separate modules in the devtools.
+  // We don't use source maps here because they can be confusing:
+  // https://github.com/facebookincubator/create-react-app/issues/343#issuecomment-237241875
+  // You may want 'cheap-module-source-map' instead if you prefer source maps.
+  devtool: 'eval',
+  // These are the "entry points" to our application.
+  // This means they will be the "root" imports that are included in JS bundle.
+  // The first two entry points enable "hot" CSS and auto-refreshes for JS.
   entry: [
-    '../src/index.js',
+    // Include an alternative client for WebpackDevServer. A client's job is to
+    // connect to WebpackDevServer by a socket and get notified about changes.
+    // When you save a file, the client will either apply hot updates (in case
+    // of CSS changes), or refresh the page (in case of JS changes). When you
+    // make a syntax error, this client will display a syntax error overlay.
+    // Note: instead of the default WebpackDevServer client, we use a custom one
+    // to bring better experience for Create React App users. You can replace
+    // the line below with these two lines if you prefer the stock client:
+    // require.resolve('webpack-dev-server/client') + '?/',
+    // require.resolve('webpack/hot/dev-server'),
+    require.resolve('react-dev-utils/webpackHotDevClient'),
+    // We ship a few polyfills by default:
+    require.resolve('./polyfills'),
+    // Finally, this is your app's code:
+    paths.appIndexJs
+    // We include the app code last so that if there is a runtime error during
+    // initialization, it doesn't blow up the WebpackDevServer client, and
+    // changing JS code would still trigger a refresh.
   ],
-
-  // Options affecting the output of the compilation
   output: {
-    path: path.resolve(__dirname, '../build/dist'),
-    publicPath: '/dist/',
-    filename: isDebug ? '[name].js?[hash]' : '[name].[hash].js',
-    chunkFilename: isDebug ? '[id].js?[chunkhash]' : '[id].[chunkhash].js',
-    sourcePrefix: '  ',
+    // Next line is not used in dev but WebpackDevServer crashes without it:
+    path: paths.appBuild,
+    // Add /* filename */ comments to generated require()s in the output.
+    pathinfo: true,
+    // This does not produce a real file. It's just the virtual path that is
+    // served by WebpackDevServer in development. This is the JS bundle
+    // containing code from all our entry points, and the Webpack runtime.
+    filename: 'static/js/bundle.js',
+    // This is the URL that app is served from. We use "/" in development.
+    publicPath: publicPath
+  },
+  resolve: {
+    // This allows you to set a fallback for where Webpack should look for modules.
+    // We read `NODE_PATH` environment variable in `paths.js` and pass paths here.
+    // We use `fallback` instead of `root` because we want `node_modules` to "win"
+    // if there any conflicts. This matches Node resolution mechanism.
+    // https://github.com/facebookincubator/create-react-app/issues/253
+    fallback: paths.nodePaths,
+    // These are the reasonable defaults supported by the Node ecosystem.
+    // We also include JSX as a common component filename extension to support
+    // some tools, although we do not recommend using it, see:
+    // https://github.com/facebookincubator/create-react-app/issues/290
+    extensions: ['.js', '.json', '.jsx', ''],
+    alias: {
+      // Support React Native Web
+      // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
+      'react-native': 'react-native-web'
+    }
   },
 
-  // Switch loaders to debug or release mode
-  debug: isDebug,
-
-  // Developer tool to enhance debugging, source maps
-  // http://webpack.github.io/docs/configuration.html#devtool
-  devtool: isDebug ? 'source-map' : false,
-  // devtool: isDebug ? 'cheap-module-eval-source-map' : false,
-
-  // What information should be printed to the console
-  stats: STATS,
-
-  // The list of plugins for Webpack compiler
-  plugins: [
-    new webpack.optimize.OccurrenceOrderPlugin(),
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': isDebug ? '"development"' : '"production"',
-      __DEV__: isDebug,
-    }),
-    // Emit a JSON file with assets paths
-    // https://github.com/sporto/assets-webpack-plugin#options
-    new AssetsPlugin({
-      path: path.resolve(__dirname, '../build/dist'),
-      filename: 'assets.json',
-      prettyPrint: true,
-    }),
-  ],
-
-  // Options affecting the normal modules
   module: {
-    loaders: [
+    // First, run the linter.
+    // It's important to do this before Babel processes the JS.
+    preLoaders: [
       {
-        test: /\.jsx?$/,
-        loader: 'babel-loader',
-        include: [
-          path.resolve(__dirname, '../src'),
-        ],
+        test: /\.(js|jsx)$/,
+        loader: 'eslint',
+        include: paths.appSrc,
+      }
+    ],
+    loaders: [
+      // Process JS with Babel.
+      {
+        test: /\.(js|jsx)$/,
+        include: paths.appSrc,
+        loader: 'babel',
         query: {
-          // https://github.com/babel/babel-loader#options
-          cacheDirectory: isDebug,
 
-          // https://babeljs.io/docs/usage/options/
-          babelrc: false,
-          presets: [
-            'react',
-            'es2015',
-            'stage-0',
-          ],
-          plugins: [
-            'transform-runtime',
-          ],
-        },
+          // This is a feature of `babel-loader` for webpack (not Babel itself).
+          // It enables caching results in ./node_modules/.cache/react-scripts/
+          // directory for faster rebuilds. We use findCacheDir() because of:
+          // https://github.com/facebookincubator/create-react-app/issues/483
+          cacheDirectory: findCacheDir({
+            name: 'react-scripts'
+          })
+        }
       },
+      // "postcss" loader applies autoprefixer to our CSS.
+      // "css" loader resolves paths in CSS and adds assets as dependencies.
+      // "style" loader turns CSS into JS modules that inject <style> tags.
+      // In production, we use a plugin to extract that CSS to a file, but
+      // in development "style" loader enables hot editing of CSS.
       {
         test: /\.css$/,
-        loaders: [
-          'style-loader',
-          `css-loader`
-        ],
-      },
-      {
-        test: /\.less$/,
-        include: path.resolve(__dirname, '../src/styles/views'),
-        loaders: [
-          'style-loader',
-          // 'isomorphic-style-loader',
-          `css-loader?${JSON.stringify({
-            sourceMap: isDebug,
-            // CSS Modules https://github.com/css-modules/css-modules
-            modules: true,
-            localIdentName: isDebug ? '[name]_[local]_[hash:base64:3]' : '[hash:base64:4]',
-            // CSS Nano http://cssnano.co/options/
-            minimize: !isDebug,
-          })}`,
-          'postcss-loader?pack=default',
-          'less-loader',
-        ],
+        loader: 'style!css?importLoaders=1!postcss'
       },
       {
         test: /\.less$/,
         exclude: path.resolve(__dirname, '../src/styles/views'),
-        loaders: [
-          'style-loader',
-          // 'isomorphic-style-loader',
-          `css-loader?${JSON.stringify({
-            sourceMap: isDebug,
-            // CSS Nano http://cssnano.co/options/
-            minimize: !isDebug,
-          })}`,
-          'postcss-loader?pack=default',
-          'less-loader',
-        ],
+        loader: 'style!css?sourceMap&importLoaders=2!postcss!less'
       },
+      {
+        test: /\.less$/,
+        // loader: 'style!css?importLoaders=1!postcss!less'
+        include: path.resolve(__dirname, '../src/styles/views'),
+        loader: 'style!css?sourceMap&modules&localIdentName=[name]_[local]_[hash:base64:3]&importLoaders=2!postcss!less'
+      },
+      // JSON is not enabled by default in Webpack but both Node and Browserify
+      // allow it implicitly so we also enable it.
       {
         test: /\.json$/,
-        loader: 'json-loader',
+        loader: 'json'
       },
+      // "file" loader makes sure those assets get served by WebpackDevServer.
+      // When you `import` an asset, you get its (virtual) filename.
+      // In production, they would get copied to the `build` folder.
       {
-        test: /\.(png|jpg|jpeg|gif|svg|woff|woff2)$/,
-        loader: 'url-loader',
+        test: /\.(ico|jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2)(\?.*)?$/,
+        loader: 'file',
         query: {
-          name: isDebug ? '[path][name].[ext]?[hash]' : '[hash].[ext]',
+          name: 'static/media/[name].[hash:8].[ext]'
+        }
+      },
+      // "url" loader works just like "file" loader but it also embeds
+      // assets smaller than specified size as data URLs to avoid requests.
+      {
+        test: /\.(mp4|webm|wav|mp3|m4a|aac|oga)(\?.*)?$/,
+        loader: 'url',
+        query: {
           limit: 10000,
-        },
-      },
-      {
-        test: /\.(eot|ttf|wav|mp3)$/,
-        loader: 'file-loader',
-        query: {
-          name: isDebug ? '[path][name].[ext]?[hash]' : '[hash].[ext]',
-        },
-      },
-    ],
+          name: 'static/media/[name].[hash:8].[ext]'
+        }
+      }
+    ]
   },
 
-  resolve: {
-    root: path.resolve(__dirname, '../src'),
-    modulesDirectories: ['node_modules'],
-    extensions: ['', '.webpack.js', '.web.js', '.js', '.jsx', '.json'],
+  // We use PostCSS for autoprefixing only.
+  postcss: function() {
+    return [
+      autoprefixer({
+        browsers: [
+          '>1%',
+          'last 4 versions',
+          'Firefox ESR',
+          'not ie < 9', // React doesn't support IE8 anyway
+        ]
+      }),
+    ];
   },
-
-  // The list of plugins for PostCSS
-  // https://github.com/postcss/postcss
-  postcss(bundler) {
-    return {
-      default: [
-        // Transfer @import rule by inlining content, e.g. @import 'normalize.css'
-        // https://github.com/postcss/postcss-import
-        require('postcss-import')({addDependencyTo: bundler}),
-        // W3C variables, e.g. :root { --color: red; } div { background: var(--color); }
-        // https://github.com/postcss/postcss-custom-properties
-        require('postcss-custom-properties')(),
-        // W3C CSS Custom Media Queries, e.g. @custom-media --small-viewport (max-width: 30em);
-        // https://github.com/postcss/postcss-custom-media
-        require('postcss-custom-media')(),
-        // CSS4 Media Queries, e.g. @media screen and (width >= 500px) and (width <= 1200px) { }
-        // https://github.com/postcss/postcss-media-minmax
-        require('postcss-media-minmax')(),
-        // W3C CSS Custom Selectors, e.g. @custom-selector :--heading h1, h2, h3, h4, h5, h6;
-        // https://github.com/postcss/postcss-custom-selectors
-        require('postcss-custom-selectors')(),
-        // W3C calc() function, e.g. div { height: calc(100px - 2em); }
-        // https://github.com/postcss/postcss-calc
-        require('postcss-calc')(),
-        // Allows you to nest one style rule inside another
-        // https://github.com/jonathantneal/postcss-nesting
-        require('postcss-nesting')(),
-        // W3C color() function, e.g. div { background: color(red alpha(90%)); }
-        // https://github.com/postcss/postcss-color-function
-        require('postcss-color-function')(),
-        // Convert CSS shorthand filters to SVG equivalent, e.g. .blur { filter: blur(4px); }
-        // https://github.com/iamvdo/pleeease-filters
-        require('pleeease-filters')(),
-        // Generate pixel fallback for "rem" units, e.g. div { margin: 2.5rem 2px 3em 100%; }
-        // https://github.com/robwierzbowski/node-pixrem
-        require('pixrem')(),
-        // W3C CSS Level4 :matches() pseudo class, e.g. p:matches(:first-child, .special) { }
-        // https://github.com/postcss/postcss-selector-matches
-        require('postcss-selector-matches')(),
-        // Transforms :not() W3C CSS Level 4 pseudo class to :not() CSS Level 3 selectors
-        // https://github.com/postcss/postcss-selector-not
-        require('postcss-selector-not')(),
-        // Add vendor prefixes to CSS rules using values from caniuse.com
-        // https://github.com/postcss/autoprefixer
-        require('autoprefixer')({browsers: AUTOPREFIXER_BROWSERS}),
-      ],
-    };
-  },
-
-  devServer: {
-    // webpack-dev-server options
-
-    contentBase: "build",
-    // Can also be an array, or: contentBase: "http://localhost/",
-
-    publicPath: '/dist/',
-
-    hot: true,
-    // Enable special support for Hot Module Replacement
-    // Page is no longer updated, but a "webpackHotUpdate" message is send to the content
-    // Use "webpack/hot/dev-server" as additional module in your entry point
-    // Note: this does _not_ add the `HotModuleReplacementPlugin` like the CLI option does.
-
-    progress: true,
-    inline: true,
-    noInfo: false,
-    historyApiFallback: true,
-
-    // pretty colored output
-    stats: STATS,
-
-    // for other settings see
-    // http://webpack.github.io/docs/webpack-dev-middleware.html
-  },
+  plugins: [
+    // Makes the public URL available as %PUBLIC_URL% in index.html, e.g.:
+    // <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
+    // In development, this will be an empty string.
+    new InterpolateHtmlPlugin({
+      PUBLIC_URL: publicUrl
+    }),
+    // Generates an `index.html` file with the <script> injected.
+    new HtmlWebpackPlugin({
+      inject: true,
+      template: paths.appHtml,
+    }),
+    // Makes some environment variables available to the JS code, for example:
+    // if (process.env.NODE_ENV === 'development') { ... }. See `./env.js`.
+    new webpack.DefinePlugin(env),
+    // This is necessary to emit hot updates (currently CSS only):
+    new webpack.HotModuleReplacementPlugin(),
+    // Watcher doesn't work well if you mistype casing in a path so we use
+    // a plugin that prints an error when you attempt to do this.
+    // See https://github.com/facebookincubator/create-react-app/issues/240
+    new CaseSensitivePathsPlugin(),
+    // If you require a missing module and then `npm install` it, you still have
+    // to restart the development server for Webpack to discover it. This plugin
+    // makes the discovery automatic so you don't have to restart.
+    // See https://github.com/facebookincubator/create-react-app/issues/186
+    new WatchMissingNodeModulesPlugin(paths.appNodeModules)
+  ],
+  // Some libraries import Node modules but don't use them in the browser.
+  // Tell Webpack to provide empty mocks for them so importing them works.
+  node: {
+    fs: 'empty',
+    net: 'empty',
+    tls: 'empty'
+  }
 };
-
-// Hot Module Replacement (HMR) + React Hot Reload
-if (isDebug && useHMR) {
-  // config.entry.unshift('react-hot-loader/patch');
-  // config.module.loaders.find(x => x.loader === 'babel-loader')
-  //   .query.plugins.unshift('react-hot-loader/babel');
-  // config.plugins.push(new webpack.HotModuleReplacementPlugin());
-  // config.plugins.push(new webpack.NoErrorsPlugin());
-}
-
-module.exports = config;

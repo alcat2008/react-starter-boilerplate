@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
+import classNames from 'classnames';
 
 class Header extends React.Component {
   constructor(props) {
@@ -13,15 +14,18 @@ class Header extends React.Component {
 
     const menu = [
       <div id="nav" key="nav">
-        Links:
-        {' '}
-        <Link to="/">Home</Link>
-        {' '}
-        <Link to="/foo">Foo</Link>
-        {' '}
-        <Link to="/page1">Page 1</Link>
-        {' '}
-        <Link to="/page2">Page 2</Link>
+        <li className={classNames({ 'menu-item-selected': activeMenuItem === '/' })}>
+          <Link to="/">Home</Link>
+        </li>
+        <li className={classNames({ 'menu-item-selected': activeMenuItem === '/foo' })}>
+          <Link to="/foo">Foo</Link>
+        </li>
+        <li className={classNames({ 'menu-item-selected': activeMenuItem === '/page1' })}>
+          <Link to="/page1">Page 1</Link>
+        </li>
+        <li className={classNames({ 'menu-item-selected': activeMenuItem === '/page2' })}>
+          <Link to="/page2">Page 2</Link>
+        </li>
       </div>,
     ];
 
