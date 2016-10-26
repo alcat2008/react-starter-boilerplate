@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import { Router, browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 
-import 'antd/dist/antd.less';
+// import 'antd/dist/antd.less';
 
 import configureStore from '../store/configureStore';
 import analytics from '../actions/analytics';
