@@ -28,6 +28,7 @@
     "no-underscore-dangle": ["off", { "allowAfterThis": true }],
     "no-unused-expressions": ["error", { "allowShortCircuit": true }],
     "no-unused-vars": ["warn", { "vars": "all", "args": "after-used", "caughtErrors": "none" }],
+    "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }],
     "object-shorthand": ["warn"],
     "padded-blocks": ["error", "never"],
     "prefer-template": ["off"],
@@ -36,5 +37,6 @@
     "react/jsx-pascal-case": ["warn", { ignore: [ ] }],
     "react/prop-types": ["warn", { ignore: ["children", "style", "params", "routing", "location", "history"] }],
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "jsx-a11y/href-no-hash": ["off"],
   }
 }

@@ -4,5 +4,8 @@
     'es2015',
     'stage-0',
   ],
-  "plugins": [["import", [{ "libraryName": "antd", "style": true }]]]
+  "plugins": [
+    "transform-decorators-legacy",
+    ["import", [{ "libraryName": "antd", "style": true }]]
+  ]
 }

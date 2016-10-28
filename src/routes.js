@@ -3,6 +3,12 @@ import { App, Home, Foo, SubPage, DemoWrapper, NotFound } from './components';
 import {
   ListBasic,
   ListSelection,
+  ListSelectionOperation,
+  ListSelectionProps,
+  ListPaging,
+  ListResetFilter,
+  ListHead,
+  ListAjax,
   Tree,
   ModalBasic,
   ModalAsync,
@@ -30,6 +36,12 @@ const routes = {
           childRoutes: [
             { path: 'basic', component: ListBasic },
             { path: 'selection', component: ListSelection },
+            { path: 'selection-operation', component: ListSelectionOperation },
+            { path: 'selection-props', component: ListSelectionProps },
+            { path: 'paging', component: ListPaging },
+            { path: 'reset-filter', component: ListResetFilter },
+            { path: 'head', component: ListHead },
+            { path: 'ajax', component: ListAjax },
           ]
         },
         { path: 'tree', component: Tree },

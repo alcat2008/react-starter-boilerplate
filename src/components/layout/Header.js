@@ -43,7 +43,7 @@ class Header extends React.Component {
         <Row>
           <Col lg={4} md={6} sm={7} xs={24}>
             <Link to="/" id="logo">
-              <span>antd</span>
+              <span>React Starter</span>
             </Link>
           </Col>
           <Col lg={20} md={18} sm={17} xs={0} style={{ display: 'block' }}>

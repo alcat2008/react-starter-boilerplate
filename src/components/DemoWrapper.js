@@ -56,6 +56,24 @@ class DemoWrapper extends React.Component {
           <MenuItem key="selection">
             <Link to="/demo/list/selection">可选择</Link>
           </MenuItem>
+          <MenuItem key="selection-operation">
+            <Link to="/demo/list/selection-operation">选择和操作</Link>
+          </MenuItem>
+          <MenuItem key="selection-props">
+            <Link to="/demo/list/selection-props">选择框属性</Link>
+          </MenuItem>
+          <MenuItem key="paging">
+            <Link to="/demo/list/paging">分页</Link>
+          </MenuItem>
+          <MenuItem key="reset-filter">
+            <Link to="/demo/list/reset-filter">可控的筛选和排序</Link>
+          </MenuItem>
+          <MenuItem key="head">
+            <Link to="/demo/list/head">筛选和排序</Link>
+          </MenuItem>
+          <MenuItem key="ajax">
+            <Link to="/demo/list/ajax">远程加载数据</Link>
+          </MenuItem>
         </SubMenu>
         <SubMenu key="modal" title={<span><Icon type="bars" /><span>Modal</span></span>}>
           <MenuItem key="basic">
