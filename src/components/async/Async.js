@@ -11,5 +11,5 @@ class Async extends React.Component {
   }
 }
 
-// export default Async;
-module.exports = Async;
+export default Async;
+// module.exports = Async;
