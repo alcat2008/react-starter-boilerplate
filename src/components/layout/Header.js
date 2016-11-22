@@ -26,6 +26,9 @@ class Header extends React.Component {
         <MenuItem key="/foo">
           <Link to="/foo">Foo</Link>
         </MenuItem>
+        <MenuItem key="/async">
+          <Link to="/async">Async</Link>
+        </MenuItem>
         <MenuItem key="/page1">
           <Link to="/page1">Page 1</Link>
         </MenuItem>

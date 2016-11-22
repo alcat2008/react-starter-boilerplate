@@ -23,6 +23,7 @@ const routes = {
   component: App,
   indexRoute: { component: Home },
   childRoutes: [
+    require('./components/async'), // eslint-disable-line global-require
     { path: 'foo', component: Foo },
     { path: 'page:index', component: SubPage },
     {
