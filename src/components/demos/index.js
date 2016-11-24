@@ -1,4 +1,6 @@
 
+export { default as District } from './district';
+
 export {
   ListBasic,
   ListSelection,

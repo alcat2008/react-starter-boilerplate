@@ -1,6 +1,7 @@
 
 import { App, Home, Foo, SubPage, DemoWrapper, NotFound } from './components';
 import {
+  District,
   ListBasic,
   ListSelection,
   ListSelectionOperation,
@@ -31,6 +32,8 @@ const routes = {
       component: DemoWrapper,
       indexRoute: { component: ListBasic },
       childRoutes: [
+        { path: 'district', component: District },
+        { path: 'tree', component: Tree },
         {
           path: 'list',
           indexRoute: { component: ListBasic },
@@ -45,7 +48,6 @@ const routes = {
             { path: 'ajax', component: ListAjax },
           ]
         },
-        { path: 'tree', component: Tree },
         {
           path: 'modal',
           indexRoute: { component: ModalBasic },

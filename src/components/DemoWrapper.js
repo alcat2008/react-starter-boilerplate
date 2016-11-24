@@ -49,6 +49,20 @@ class DemoWrapper extends React.Component {
         onOpenChange={this.onOpenChange}
         onClick={this.handleClick}
       >
+        <SubMenu key="sub3" title={<span><Icon type="appstore" /><span>Components</span></span>}>
+          <MenuItem key="2">
+            <Link to="/demo/district">District</Link>
+          </MenuItem>
+          <MenuItem key="3">
+            <Link to="/demo/tree">Tree</Link>
+          </MenuItem>
+          <MenuItem key="5">Option 5</MenuItem>
+          <MenuItem key="6">Option 6</MenuItem>
+          <SubMenu key="sub3" title="Submenu">
+            <MenuItem key="7">Option 7</MenuItem>
+            <MenuItem key="8">Option 8</MenuItem>
+          </SubMenu>
+        </SubMenu>
         <SubMenu key="list" title={<span><Icon type="bars" /><span>List</span></span>}>
           <MenuItem key="basic">
             <Link to="/demo/list/basic">基本用法</Link>
@@ -94,17 +108,6 @@ class DemoWrapper extends React.Component {
           <MenuItem key="manual">
             <Link to="/demo/modal/manual">手动移除</Link>
           </MenuItem>
-        </SubMenu>
-        <SubMenu key="sub3" title={<span><Icon type="appstore" /><span>Tree</span></span>}>
-          <MenuItem key="2">
-            <Link to="/demo/tree">Tree</Link>
-          </MenuItem>
-          <MenuItem key="5">Option 5</MenuItem>
-          <MenuItem key="6">Option 6</MenuItem>
-          <SubMenu key="sub3" title="Submenu">
-            <MenuItem key="7">Option 7</MenuItem>
-            <MenuItem key="8">Option 8</MenuItem>
-          </SubMenu>
         </SubMenu>
         <SubMenu key="sub4" title={<span><Icon type="setting" /><span>Navigation Three</span></span>}>
           <MenuItem key="9">Option 9</MenuItem>

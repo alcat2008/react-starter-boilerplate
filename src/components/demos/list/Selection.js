@@ -33,7 +33,8 @@ const data = [{
 /* eslint-disable no-console */
 // rowSelection object indicates the need for row selection
 const rowSelection = {
-  type: 'checkbox',
+  // type: 'checkbox',
+  type: 'radio',
   onChange(selectedRowKeys, selectedRows) {
     console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
   },
