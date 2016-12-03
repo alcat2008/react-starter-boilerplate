@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unused-prop-types */
 
 import React, { PropTypes } from 'react';
-import ReactDOM from 'react-dom';
+// import ReactDOM from 'react-dom';
 import classNames from 'classnames';
 
 export default class Steps extends React.Component {
@@ -43,7 +43,8 @@ export default class Steps extends React.Component {
     }
   }
   culcLastStepOffsetWidth = () => {
-    const domNode = ReactDOM.findDOMNode(this); // eslint-disable-line
+    // const domNode = ReactDOM.findDOMNode(this);
+    const domNode = this._steps;
     if (domNode.children.length > 0) {
       this.culcTimeout = setTimeout(() => {
         // +1 for fit edge bug of digit width, like 35.4px
@@ -71,7 +72,7 @@ export default class Steps extends React.Component {
     });
 
     return (
-      <div className={classString} style={style} {...restProps}>
+      <div ref={c => { this._steps = c; }} className={classString} style={style} {...restProps}>
         {
           React.Children.map(children, (ele, idx) => {
             const tailWidth = (direction === 'vertical' || idx === lastIndex || !reLayouted)
