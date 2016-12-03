@@ -11,6 +11,7 @@ import {
   ListHead,
   ListAjax,
   Tree,
+  Steps,
   ModalBasic,
   ModalAsync,
   ModalConfirm,
@@ -34,6 +35,7 @@ const routes = {
       childRoutes: [
         { path: 'district', component: District },
         { path: 'tree', component: Tree },
+        { path: 'steps', component: Steps },
         {
           path: 'list',
           indexRoute: { component: ListBasic },

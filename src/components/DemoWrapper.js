@@ -56,6 +56,9 @@ class DemoWrapper extends React.Component {
           <MenuItem key="3">
             <Link to="/demo/tree">Tree</Link>
           </MenuItem>
+          <MenuItem key="4">
+            <Link to="/demo/steps">Steps</Link>
+          </MenuItem>
           <MenuItem key="5">Option 5</MenuItem>
           <MenuItem key="6">Option 6</MenuItem>
           <SubMenu key="sub3" title="Submenu">

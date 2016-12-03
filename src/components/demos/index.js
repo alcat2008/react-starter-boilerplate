@@ -13,6 +13,7 @@ export {
 } from './list';
 
 export Tree from './Tree';
+export Steps from './steps';
 
 export {
   ModalBasic,
