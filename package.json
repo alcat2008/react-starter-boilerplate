@@ -5,7 +5,7 @@
   "private": true,
   "license": "MIT",
   "dependencies": {
-    "antd": "^2.1.0",
+    "antd": "^2.7.3",
     "babel-polyfill": "^6.9.1",
     "classnames": "^2.2.5",
     "core-decorators": "^0.14.0",
@@ -60,10 +60,11 @@
     "json-loader": "0.5.4",
     "less": "^2.7.1",
     "less-loader": "^2.2.3",
+    "lesshint": "^3.1.0",
     "object-assign": "4.1.0",
     "path-exists": "2.1.0",
     "postcss-loader": "1.0.0",
-    "pre-commit": "^1.2.2",
+    "precommit-hook-eslint": "^3.0.0",
     "promise": "7.1.1",
     "react-dev-utils": "^0.3.0",
     "recursive-readdir": "2.1.0",
@@ -76,18 +77,12 @@
     "webpack-dev-server": "1.16.2",
     "webpack-manifest-plugin": "1.1.0"
   },
-  "stylelint": {
-    "extends": "stylelint-config-standard",
-    "rules": {
-      "string-quotes": "double"
-    }
-  },
   "scripts": {
     "start": "node bin/start.js",
     "build": "node bin/build.js",
     "eslint": "eslint ./src",
-    "stylelint": "stylelint \"src/styles/**/*.less\" --syntax less",
-    "lint": "npm run eslint",
+    "lesshint": "lesshint src/styles -r config/lesshint-report.js",
+    "lint": "npm run eslint && npm run lesshint",
     "validate": "npm ls",
     "test": "mocha --compilers js:babel-register --recursive"
   },
