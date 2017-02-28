@@ -10,6 +10,7 @@ export {
   ListResetFilter,
   ListHead,
   ListAjax,
+  ListNestedTable,
 } from './list';
 
 export Tree from './Tree';

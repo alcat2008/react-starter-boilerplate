@@ -10,6 +10,7 @@ import {
   ListResetFilter,
   ListHead,
   ListAjax,
+  ListNestedTable,
   Tree,
   Steps,
   ModalBasic,
@@ -48,6 +49,7 @@ const routes = {
             { path: 'reset-filter', component: ListResetFilter },
             { path: 'head', component: ListHead },
             { path: 'ajax', component: ListAjax },
+            { path: 'nested-table', component: ListNestedTable },
           ]
         },
         {

@@ -7,3 +7,4 @@ export { default as ListPaging } from './Paging';
 export { default as ListResetFilter } from './ResetFilter';
 export { default as ListHead } from './Head';
 export { default as ListAjax } from './Ajax';
+export { default as ListNestedTable } from './NestedTable';

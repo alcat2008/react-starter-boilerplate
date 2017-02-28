@@ -91,6 +91,9 @@ class DemoWrapper extends React.Component {
           <MenuItem key="ajax">
             <Link to="/demo/list/ajax">远程加载数据</Link>
           </MenuItem>
+          <MenuItem key="nested-table">
+            <Link to="/demo/list/nested-table">嵌套子表格</Link>
+          </MenuItem>
         </SubMenu>
         <SubMenu key="modal" title={<span><Icon type="bars" /><span>Modal</span></span>}>
           <MenuItem key="basic">
