@@ -72,8 +72,8 @@ The application structure presented in this boilerplate is **fractal**, where fu
 ├── config                   # Project configuration settings
 │   └── webpack.config.js    # Environment-specific configuration files for webpack
 ├── node_modules             # 3rd-party libraries and utilities
-├── server                   # Koa application (uses webpack middleware)
-│   └── main.js              # Server application entry point
+├── server                   # Express application
+│   └── app.js               # Server application entry point
 ├── src                      # Application source code
 │   ├── index.js             # React application entry point
 │   ├── actions              # This list of application actions
@@ -82,13 +82,13 @@ The application structure presented in this boilerplate is **fractal**, where fu
 │   │── public               # Static files such as favicon.ico etc
 │   │   ├── favicon.ico      # Application icon to be displayed in bookmarks
 │   │   ├── robots.txt       # Instructions for search engine crawlers
+│   │   ├── index.html       # Html templates
 │   │   └── ...              # etc
 │   ├── reducers             # This list of application reducers
 │   ├── store                # Redux-specific pieces
 │   │   └── configureStore.js# Create and instrument redux store
 │   ├── styles               # Application-wide styles (generally settings)
-│   ├── routes               # Main route definitions and async split points
-│   └── views                # Html templates
+│   └── routes.js            # Main route definitions and async split points
 │── test                     # Unit and integration tests
 │── .editorconfig            # Defining coding styles
 │── .eslintignore            # Ignoring files and directories from linting
@@ -126,6 +126,16 @@ Out of the box, this starter kit is deployable by serving the `~/dist` folder ge
 
 ### Static Deployments
 If you are serving the application via a web server such as nginx, make sure to direct incoming routes to the root `~/dist/index.html` file and let react-router take care of the rest. If you are unsure of how to do this, you might find [this documentation](https://github.com/reactjs/react-router/blob/master/docs/guides/Histories.md#configuring-your-server) helpful. The Koa server that comes with the starter kit is able to be extended to serve as an API or whatever else you need, but that's entirely up to you.
+
+## Log
+
+Log state enable is currently persisted by localStorage. You can enable this using localStorage.debug:
+
+```bash
+localStorage.debug = 'react-starter:*'
+```
+
+And then refresh the page.
 
 ## Build System
 
