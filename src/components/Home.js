@@ -2,7 +2,7 @@ import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
-import { increase, decrease } from '../actions/count';
+import { increase, decrease, increaseAsync } from '../actions/count';
 
 import homeStyle from '../styles/views/home.less';
 
@@ -24,6 +24,7 @@ class Home extends React.Component {
           {number}
           <button onClick={() => this.props.actions.increase(1)}>Increase</button>
           <button onClick={() => this.props.actions.decrease(1)}>Decrease</button>
+          <button onClick={() => this.props.actions.increaseAsync(1)}>Increment async</button>
         </div>
       </div>
     );
@@ -38,7 +39,11 @@ const mapStateToProps = state => ({
 // eslint-disable-next-line arrow-body-style
 const mapDispatchToProps = dispatch => ({
   actions: {
-    ...bindActionCreators({ increase, decrease }, dispatch)
+    ...bindActionCreators({
+      increase,
+      decrease,
+      increaseAsync,
+    }, dispatch)
   }
 });
 
