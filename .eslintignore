@@ -1,4 +1,6 @@
 **/node_modules/**
-**/bower_components/**
-webpack.config.js
-Gulpfile.js
+bin/
+config/
+server/
+test/
+
