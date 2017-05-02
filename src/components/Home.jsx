@@ -31,12 +31,10 @@ class Home extends React.Component {
   }
 }
 
-// eslint-disable-next-line arrow-body-style
 const mapStateToProps = state => ({
   number: state.count.number,
 });
 
-// eslint-disable-next-line arrow-body-style
 const mapDispatchToProps = dispatch => ({
   actions: {
     ...bindActionCreators({

@@ -44,20 +44,30 @@ class App extends React.Component {
     //   return children;
     // }
 
-    const childElement = [
-      <Nav isMode={this.state.isMode} location={location} />,
-      React.cloneElement(children, {
-        // profile,
-        // subdomains,
-        // ...routeActions,
-        // isMode: this.state.isMode,
-      }),
-      <Footer isMode={this.state.isMode} />,
-    ];
+    // const childElement = [
+    //   <Nav isMode={this.state.isMode} location={location} />,
+    //   React.cloneElement(children, {
+    //     // profile,
+    //     // subdomains,
+    //     // ...routeActions,
+    //     // isMode: this.state.isMode,
+    //   }),
+    //   <Footer isMode={this.state.isMode} />,
+    // ];
+    const contentHeight = document.documentElement.clientHeight - 144;
 
     return (
       <div className="templates-wrapper">
-        {childElement}
+        <Nav isMode={this.state.isMode} location={location} />
+        <div style={{ minHeight: contentHeight }}>
+          {React.cloneElement(children, {
+            // profile,
+            // subdomains,
+            // ...routeActions,
+            // isMode: this.state.isMode,
+          })}
+        </div>
+        <Footer isMode={this.state.isMode} />
       </div>
     );
   }
