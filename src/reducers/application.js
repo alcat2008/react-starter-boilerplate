@@ -1,6 +1,7 @@
 
 const initialState = {
-  subdomains: {}
+  subdomains: {},
+  info: {},
 };
 
 export default function update(state = initialState, action) {
@@ -11,7 +12,13 @@ export default function update(state = initialState, action) {
       //   servicesList.push(action.payload[subdomain].)
       // })
       return {
+        ...state,
         subdomains: action.payload
+      };
+    case 'SERVICE_INFO':
+      return {
+        ...state,
+        info: action.payload
       };
     default:
       return state;

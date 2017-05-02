@@ -14,7 +14,13 @@ function* getServices() {
   yield put({ type: 'SERVICE_LIST', payload: subdomains });
 }
 
+function* getInfo(action) {
+  const serviceInfo = yield PFetch(links.service.info, action.payload);
+  yield put({ type: 'SERVICE_INFO', payload: serviceInfo });
+}
+
 export default function* counterSaga() {
   yield takeEvery('INCREASE_ASYNC', incrementAsync);
   yield takeEvery('SERVICE_LIST_GET', getServices);
+  yield takeEvery('SERVICE_INFO_GET', getInfo);
 }

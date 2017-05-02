@@ -19,6 +19,7 @@ const routes = {
           indexRoute: { component: Developer.Services },
           childRoutes: [
             { path: 'services', component: Developer.Services },
+            { path: 'service/:subdomain/:name', component: Developer.Info },
           ]
         },
       ]

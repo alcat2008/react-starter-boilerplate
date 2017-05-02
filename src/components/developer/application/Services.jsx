@@ -42,7 +42,9 @@ class Services extends React.Component {
       title: '服务名',
       key: 'serviceName',
       dataIndex: 'serviceName',
-      render: text => <Link>{text}</Link>
+      render: (text, record) => (
+        <Link to={'/developer/application/service/' + record.subdomain + '/' + record.id}>{text}</Link>
+      )
     },
     { title: '主实体',
       key: 'mainEntity',
@@ -109,7 +111,7 @@ class Services extends React.Component {
           pagination={false}
           columns={this.columns}
           rowKey="id"
-          // getBodyWrapper={this._getBodyWrapper}
+          getBodyWrapper={this._getBodyWrapper}
           dataSource={serviceList}
         />
       </div>

@@ -5,4 +5,9 @@ export default {
     dsl: 'scan/dsl',
     bpm: 'scan/bpm',
   },
+
+  // service
+  service: {
+    info: 'service/info',
+  }
 };
