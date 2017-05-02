@@ -1,10 +1,13 @@
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { browserHistory } from 'react-router';
+
+import { Element } from 'rc-banner-anim';
+import OverPack from 'rc-scroll-anim/lib/ScrollOverPack';
+
 import { increase, decrease, increaseAsync } from '../actions/count';
 
-import homeStyle from '../styles/views/home.less';
+const BgElement = Element.BgElement;
 
 // eslint-disable-next-line
 class Home extends React.Component {
@@ -13,20 +16,17 @@ class Home extends React.Component {
   };
 
   render() {
-    const { number } = this.props;
     return (
-      <div>
-        <div className={homeStyle.jump}>
-          <button onClick={() => browserHistory.push('/foo')}>Go to /foo</button>
-        </div>
-        <div>
-          Some state changes:
-          {number}
-          <button onClick={() => this.props.actions.increase(1)}>Increase</button>
-          <button onClick={() => this.props.actions.decrease(1)}>Decrease</button>
-          <button onClick={() => this.props.actions.increaseAsync(1)}>Increment async</button>
-        </div>
-      </div>
+      <OverPack
+        className="home"
+      >
+        <BgElement
+          className="bg bg0"
+          key="bg"
+          id="bg$0"
+          scrollParallax={{ y: 300 }}
+        />
+      </OverPack>
     );
   }
 }

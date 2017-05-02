@@ -16,7 +16,7 @@
     "mocha": true
   },
   "rules": {
-    "arrow-parens": ["error", "as-needed"],
+    "arrow-parens": ["off", "as-needed"],
     "arrow-body-style": ["warn", "as-needed", { "requireReturnForObjectLiteral": true }],
     "comma-dangle": ["warn", "only-multiline"],
     "global-require": ["warn"],
