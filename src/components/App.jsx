@@ -2,9 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import enquire from 'enquire.js';
 
-// import Header from './layout/Header';
-import Nav from './layout/Nav';
-import Footer from './layout/Footer';
+import { Nav, Footer } from './layout';
 
 import '../styles/index.less';
 

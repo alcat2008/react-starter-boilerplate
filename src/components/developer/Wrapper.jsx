@@ -6,8 +6,18 @@ const { Item: BreadcrumbItem } = Breadcrumb;
 const { SubMenu, Item: MenuItem } = Menu;
 const { Content, Sider } = Layout;
 
+function createLinkMenu(key, value) {
+  return (
+    <MenuItem key={key}>
+      <Link to={key}>{value}</Link>
+    </MenuItem>
+  );
+}
+
 class Developer extends React.Component {
   render() {
+    const { location } = this.props;
+    const openKey = location.pathname.split('/')[2];
     return (
       <Content style={{ padding: '0 50px' }}>
         <Breadcrumb style={{ margin: '12px 0' }}>
@@ -19,28 +29,30 @@ class Developer extends React.Component {
           <Sider width={200} style={{ background: '#fff' }}>
             <Menu
               mode="inline"
-              defaultSelectedKeys={['services']}
-              defaultOpenKeys={['application']}
+              defaultSelectedKeys={[location.pathname]}
+              defaultOpenKeys={[openKey]}
               style={{ height: '100%' }}
             >
               <SubMenu key="resources" title={<span><Icon type="laptop" />资源管理</span>}>
-                <MenuItem key="1">option1</MenuItem>
-                <MenuItem key="2">option2</MenuItem>
-                <MenuItem key="3">option3</MenuItem>
-                <MenuItem key="4">option4</MenuItem>
+                {createLinkMenu('/developer/resources/server', '云服务器')}
+                {createLinkMenu('/developer/resources/mirror', '镜像')}
+                {createLinkMenu('/developer/resources/dbs', 'DB Schema')}
+                {createLinkMenu('/developer/resources/repos', '代码托管')}
+                {createLinkMenu('/developer/resources/domain', '域名')}
               </SubMenu>
               <SubMenu key="application" title={<span><Icon type="appstore-o" />应用管理</span>}>
-                <MenuItem key="services">
-                  <Link to="/developer/application/services">服务列表</Link>
-                </MenuItem>
+                {createLinkMenu('/developer/application/basic', '基础配置')}
+                {createLinkMenu('/developer/application/services', '服务管理')}
+                {createLinkMenu('/developer/application/flows', '流程管理')}
               </SubMenu>
-              <SubMenu key="DevOps" title={<span><Icon type="solution" />DevOps</span>}>
-                <MenuItem key="9">option9</MenuItem>
-                <MenuItem key="10">option10</MenuItem>
+              <SubMenu key="devops" title={<span><Icon type="solution" />DevOps</span>}>
+                {createLinkMenu('/developer/devops/build', '编译构建')}
+                {createLinkMenu('/developer/devops/sandbox', '沙箱测试')}
+                {createLinkMenu('/developer/devops/deploy', '部署服务')}
               </SubMenu>
-              <SubMenu key="Monitor" title={<span><Icon type="notification" />监控中心</span>}>
-                <MenuItem key="11">option11</MenuItem>
-                <MenuItem key="12">option12</MenuItem>
+              <SubMenu key="monitor" title={<span><Icon type="notification" />监控中心</span>}>
+                {createLinkMenu('/developer/monitor/logs', '日志服务')}
+                {createLinkMenu('/developer/monitor/dbs', '数据库')}
               </SubMenu>
             </Menu>
           </Sider>

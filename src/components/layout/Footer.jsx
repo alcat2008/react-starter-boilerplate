@@ -47,7 +47,7 @@ class Footer extends React.Component {
           id={`${props.id}-content`}
         >
         <span>
-          Copyright © 2016 The Project by <a href="#">Ant Motion</a>. All Rights Reserved
+          Copyright © 2016 The Project by <a href="http://www.izirong.com/" target="_blank">izirong</a>. All Rights Reserved
         </span>
         </TweenOne>
       </footer>

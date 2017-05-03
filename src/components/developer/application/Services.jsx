@@ -2,31 +2,40 @@ import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
-import { Table, Switch } from 'antd';
-import TweenOne from 'rc-tween-one';
+import { Table, Tabs, Icon } from 'antd';
+import QueueAnim from 'rc-queue-anim';
 
 import { getServices } from '../../../actions/application';
 
-const TweenOneGroup = TweenOne.TweenOneGroup;
+function generateBooleanColumn(title, key) {
+  return {
+    title,
+    key,
+    dataIndex: key,
+    render: text => (text ? <Icon style={{ color: 'green' }} type="check-circle-o" />
+      : <Icon style={{ color: 'red' }} type="close-circle-o" />),
+  };
+}
 
-const Anim = {
-  enter: [
-    { x: 30, backgroundColor: '#fffeee', duration: 0 },
-    {
-      duration: 100,
-      type: 'from',
-      delay: 100,
-      ease: 'easeOutQuad'
-    },
-    { x: 0, duration: 100, ease: 'easeOutQuad' },
-    { delay: 1000, backgroundColor: '#fff' },
-  ],
-  leave: [
-    { backgroundColor: '#fffeee' },
-    { duration: 100, opacity: 0, x: 50 },
-    { height: 0, duration: 100, ease: 'easeOutQuad' },
-  ]
-};
+// const Anim = {
+//   enter: [
+//     { x: 30, backgroundColor: '#fffeee', duration: 0 },
+//     {
+//       duration: 100,
+//       type: 'from',
+//       delay: 100,
+//       ease: 'easeOutQuad'
+//     },
+//     { x: 0, duration: 100, ease: 'easeOutQuad' },
+//     { delay: 1000, backgroundColor: '#fff' },
+//   ],
+//   leave: [
+//     { backgroundColor: '#fffeee' },
+//     { duration: 100, opacity: 0, x: 50 },
+//     { height: 0, duration: 100, ease: 'easeOutQuad' },
+//   ]
+// };
+const TabPane = Tabs.TabPane;
 
 class Services extends React.Component {
   componentDidMount() {
@@ -63,18 +72,7 @@ class Services extends React.Component {
       // ),
     },
     { title: '关联服务', key: 'refService', dataIndex: 'refService' },
-    { title: '菜单服务',
-      key: 'isMenuService',
-      dataIndex: 'isMenuService',
-      render: (text) => (
-        <Switch
-          checkedChildren={'开'}
-          unCheckedChildren={'关'}
-          checked={text}
-          // onChange={(e) => this._menuServiceChange(index, e)}
-        />
-      ),
-    },
+    generateBooleanColumn('菜单服务', 'isMenuService'),
     {
       title: '服务文件',
       key: 'files',
@@ -85,36 +83,42 @@ class Services extends React.Component {
 
 
   _getBodyWrapper = (body) => {
-    return (<TweenOneGroup
+    return (<QueueAnim
       component="tbody"
       className={body.props.className + ' animated fadeInRight'}
-      enter={Anim.enter}
-      leave={Anim.leave}
+      // enter={Anim.enter}
+      // leave={Anim.leave}
       appear={false}
     >
       {body.props.children}
-    </TweenOneGroup>);
+    </QueueAnim>);
   }
 
   render() {
     const { application } = this.props;
-
-    let serviceList = [];
-    Object.keys(application.subdomains).forEach(subdomain => {
-      serviceList = serviceList.concat(application.subdomains[subdomain].services);
-    });
-
     return (
-      <div>
-        <Table
-          style={{ width: '100%' }}
-          pagination={false}
-          columns={this.columns}
-          rowKey="id"
-          getBodyWrapper={this._getBodyWrapper}
-          dataSource={serviceList}
-        />
-      </div>
+      <Tabs defaultActiveKey="0">
+        {
+          Object.keys(application.subdomains).map((subdomain, index) => {
+            if (application.subdomains[subdomain].services.length === 0) {
+              return null;
+            }
+
+            return (
+              <TabPane tab={subdomain} key={index}>
+                <Table
+                  style={{ width: '100%' }}
+                  pagination={false}
+                  columns={this.columns}
+                  rowKey="id"
+                  // getBodyWrapper={this._getBodyWrapper}
+                  dataSource={application.subdomains[subdomain].services}
+                />
+              </TabPane>
+            );
+          })
+        }
+      </Tabs>
     );
   }
 }

@@ -1,6 +1,5 @@
 
-import { App, Home, NotFound, Console } from './components/index';
-import * as Developer from './components/developer';
+import { App, Home, NotFound, Console, Developer } from './components/index';
 
 const routes = {
   path: '/',
@@ -18,6 +17,7 @@ const routes = {
           path: 'application',
           indexRoute: { component: Developer.Services },
           childRoutes: [
+            { path: 'basic', component: Developer.Basic },
             { path: 'services', component: Developer.Services },
             { path: 'service/:subdomain/:name', component: Developer.Info },
           ]

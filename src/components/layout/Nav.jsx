@@ -24,15 +24,7 @@ class Header extends React.Component {
 
   render() {
     const { isMode, location, ...restProps } = this.props;
-    // const navData = {
-    //   ['/']: <Link to="/">首页</Link>,
-    //   ['/console']: <Link to="/console">控制台</Link>,
-    //   ['/developer']: <Link to="/developer">开发者中心</Link>,
-    //   ['/materail']: <Link to="/">文档资料</Link>,
-    // };
-    // const navChildren = Object.keys(navData).map((key, i) => (<MenuItem key={i}>
-    //   {navData[key]}
-    // </MenuItem>));
+    const currentKey = '/' + location.pathname.split('/')[1];
     const navChildren = [
       (
         <MenuItem key="/">
@@ -82,7 +74,7 @@ class Header extends React.Component {
         animation={{ x: -30, delay: 100, type: 'from', ease: 'easeOutQuad' }}
         id={`${this.props.id}-logo`}
       >
-        <img width="100%" src="https://os.alipayobjects.com/rmsportal/mlcYmsRilwraoAe.svg" />
+        <Link to="/">LOGO</Link>
       </TweenOne>
       {isMode ? (<div
           className={`${this.props.className}-phone-nav${this.state.phoneOpen ? ' open' : ''}`}
@@ -118,7 +110,7 @@ class Header extends React.Component {
           <Menu
             mode="horizontal"
             // defaultSelectedKeys={['0']}
-            selectedKeys={[location.pathname]}
+            selectedKeys={[currentKey]}
             id={`${this.props.id}-menu`}
           >
             {navChildren}

@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 // import { Link } from 'react-router';
 import { Tag, Card, Steps } from 'antd';
+import QueueAnim from 'rc-queue-anim';
 
 import { getInfo } from '../../../actions/application';
 import config from '../../../config';
@@ -28,8 +29,8 @@ class Info extends React.Component {
     if (!serviceData) return null;
 
     return (
-      <div className="service-info">
-        <div className="service-detail">
+      <QueueAnim type={['right', 'left']} delay={300} className="service-info">
+        <div className="service-detail" key="detail">
           <div className="title">{serviceData.comment}</div>
           <p>ID： {serviceData.id}</p>
           <p>子域： {serviceData.subdomain}</p>
@@ -38,7 +39,7 @@ class Info extends React.Component {
             {serviceData.isWorkflow && <Tag> 流程 </Tag>}
           </p>
         </div>
-        <div className="service-status">
+        <div className="service-status" key="status">
           <Card title="处理进度" bordered={false}>
             <Steps current={1} >
               <Step title="创建项目" description="创建项目" />
@@ -48,8 +49,8 @@ class Info extends React.Component {
             </Steps>
           </Card>
         </div>
-        <div className="service-tool">
-          <div className="service-card">
+        <QueueAnim className="service-tool" key="tool" type="bottom">
+          <div className="service-card" key="dsl">
             <figure>
               <img src="https://zos.alipayobjects.com/rmsportal/LHOwsfdUrDkSWYThlSqF.png" alt="自定义 DSL" />
               <figcaption>自定义 DSL</figcaption>
@@ -63,9 +64,9 @@ class Info extends React.Component {
               >创建</a>
             </div>
           </div>
-          <div className="service-card">
+          <div className="service-card" key="flow">
             <figure>
-              <img src="https://zos.alipayobjects.com/rmsportal/LHOwsfdUrDkSWYThlSqF.png" alt="自定义 DSL" />
+              <img src="https://zos.alipayobjects.com/rmsportal/LHOwsfdUrDkSWYThlSqF.png" alt="自定义流程" />
               <figcaption>自定义流程</figcaption>
             </figure>
             <p>接入API为用户提供服务</p>
@@ -77,9 +78,9 @@ class Info extends React.Component {
               >创建</a>
             </div>
           </div>
-          <div className="service-card">
+          <div className="service-card" key="logic">
             <figure>
-              <img src="https://zos.alipayobjects.com/rmsportal/LHOwsfdUrDkSWYThlSqF.png" alt="自定义 DSL" />
+              <img src="https://zos.alipayobjects.com/rmsportal/LHOwsfdUrDkSWYThlSqF.png" alt="自定义逻辑" />
               <figcaption>自定义逻辑</figcaption>
             </figure>
             <p>接入API为用户提供服务</p>
@@ -91,8 +92,8 @@ class Info extends React.Component {
               >编辑</a>
             </div>
           </div>
-        </div>
-      </div>
+        </QueueAnim>
+      </QueueAnim>
     );
   }
 }
