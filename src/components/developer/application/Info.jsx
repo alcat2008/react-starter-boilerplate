@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 // import { Link } from 'react-router';
 import { Tag, Card, Steps } from 'antd';
 import QueueAnim from 'rc-queue-anim';
+import { LinkableCard } from '../../layout';
 
 import { getInfo } from '../../../actions/application';
 import config from '../../../config';
@@ -33,7 +34,7 @@ class Info extends React.Component {
         <div className="service-detail" key="detail">
           <div className="title">{serviceData.comment}</div>
           <p>ID： {serviceData.id}</p>
-          <p>子域： {serviceData.subdomain}</p>
+          <p>模块： {serviceData.subdomain}</p>
           <p>
             {serviceData.isMenuService && <Tag> 菜单服务 </Tag>}
             {serviceData.isWorkflow && <Tag> 流程 </Tag>}
@@ -50,48 +51,39 @@ class Info extends React.Component {
           </Card>
         </div>
         <QueueAnim className="service-tool" key="tool" type="bottom">
-          <div className="service-card" key="dsl">
-            <figure>
-              <img src="https://zos.alipayobjects.com/rmsportal/LHOwsfdUrDkSWYThlSqF.png" alt="自定义 DSL" />
-              <figcaption>自定义 DSL</figcaption>
-            </figure>
-            <p>接入API为用户提供服务</p>
-            <div>
-              <a
-                href={config.dslHost + serviceData.subdomain + '/' + serviceData.id + '?mode=inner'}
-                target="_blank"
-                rel="noopener noreferrer"
-              >创建</a>
-            </div>
-          </div>
-          <div className="service-card" key="flow">
-            <figure>
-              <img src="https://zos.alipayobjects.com/rmsportal/LHOwsfdUrDkSWYThlSqF.png" alt="自定义流程" />
-              <figcaption>自定义流程</figcaption>
-            </figure>
-            <p>接入API为用户提供服务</p>
-            <div>
-              <a
-                href={config.flowHost}
-                target="_blank"
-                rel="noopener noreferrer"
-              >创建</a>
-            </div>
-          </div>
-          <div className="service-card" key="logic">
-            <figure>
-              <img src="https://zos.alipayobjects.com/rmsportal/LHOwsfdUrDkSWYThlSqF.png" alt="自定义逻辑" />
-              <figcaption>自定义逻辑</figcaption>
-            </figure>
-            <p>接入API为用户提供服务</p>
-            <div>
-              <a
-                href={config.ideHost}
-                target="_blank"
-                rel="noopener noreferrer"
-              >编辑</a>
-            </div>
-          </div>
+          <LinkableCard
+            key="dsl"
+            figure="自定义 DSL"
+            href={config.dslHost + 'service/' + serviceData.subdomain + '/' + serviceData.id + '?mode=inner'}
+          />
+          <LinkableCard
+            key="flow"
+            figure="自定义流程"
+            href={config.flowHost}
+          />
+          <LinkableCard
+            key="logic"
+            figure="自定义逻辑"
+            href={config.ideHost}
+            text="编辑"
+          />
+          <LinkableCard
+            key="dict"
+            figure="自定义数据字典"
+            href={config.dslHost + 'dictionary?mode=inner'}
+          />
+          <LinkableCard
+            key="template"
+            figure="自定义模板"
+          />
+          <LinkableCard
+            key="rule"
+            figure="自定义规则"
+          />
+          <LinkableCard
+            key="entity"
+            figure="自定义实体"
+          />
         </QueueAnim>
       </QueueAnim>
     );
