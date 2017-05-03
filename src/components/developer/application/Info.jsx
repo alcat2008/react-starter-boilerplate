@@ -50,7 +50,7 @@ class Info extends React.Component {
             </Steps>
           </Card>
         </div>
-        <QueueAnim className="service-tool" key="tool" type="bottom">
+        <QueueAnim className="linkable-container" key="tool" type="bottom">
           <LinkableCard
             key="dsl"
             figure="自定义 DSL"
