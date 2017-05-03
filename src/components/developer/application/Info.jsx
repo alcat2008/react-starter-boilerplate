@@ -30,7 +30,7 @@ class Info extends React.Component {
     if (!serviceData) return null;
 
     return (
-      <QueueAnim type={['right', 'left']} delay={300} className="service-info">
+      <QueueAnim type={['right', 'left']} className="service-info">
         <div className="service-detail" key="detail">
           <div className="title">{serviceData.comment}</div>
           <p>ID： {serviceData.id}</p>

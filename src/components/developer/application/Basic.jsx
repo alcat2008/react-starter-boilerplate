@@ -5,7 +5,7 @@ import { LinkableCard } from '../../layout';
 class Basic extends React.Component {
   render() {
     return (
-      <QueueAnim type={['right', 'left']} delay={300} className="service-info">
+      <QueueAnim type={['right', 'left']} className="service-info">
         <div className="service-detail" key="detail">
           <div className="title">基础配置</div>
         </div>

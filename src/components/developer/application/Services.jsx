@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { Table, Tabs, Icon } from 'antd';
 import QueueAnim from 'rc-queue-anim';
+import TweenOne from 'rc-tween-one';
 
 import { getServices } from '../../../actions/application';
 
@@ -17,25 +18,8 @@ function generateBooleanColumn(title, key) {
   };
 }
 
-// const Anim = {
-//   enter: [
-//     { x: 30, backgroundColor: '#fffeee', duration: 0 },
-//     {
-//       duration: 100,
-//       type: 'from',
-//       delay: 100,
-//       ease: 'easeOutQuad'
-//     },
-//     { x: 0, duration: 100, ease: 'easeOutQuad' },
-//     { delay: 1000, backgroundColor: '#fff' },
-//   ],
-//   leave: [
-//     { backgroundColor: '#fffeee' },
-//     { duration: 100, opacity: 0, x: 50 },
-//     { height: 0, duration: 100, ease: 'easeOutQuad' },
-//   ]
-// };
 const TabPane = Tabs.TabPane;
+const TweenOneGroup = TweenOne.TweenOneGroup;
 
 class Services extends React.Component {
   componentDidMount() {
@@ -83,42 +67,43 @@ class Services extends React.Component {
 
 
   _getBodyWrapper = (body) => {
-    return (<QueueAnim
+    return (<TweenOneGroup
       component="tbody"
-      className={body.props.className + ' animated fadeInRight'}
-      // enter={Anim.enter}
-      // leave={Anim.leave}
-      appear={false}
+      // className={body.props.className + ' animated fadeInRight'}
+      className={body.props.className}
+      // appear={false}
     >
       {body.props.children}
-    </QueueAnim>);
+    </TweenOneGroup>);
   }
 
   render() {
     const { application } = this.props;
     return (
-      <Tabs defaultActiveKey="0">
-        {
-          Object.keys(application.subdomains).map((subdomain, index) => {
-            if (application.subdomains[subdomain].services.length === 0) {
-              return null;
-            }
+      <QueueAnim type={['right', 'left']}>
+        <Tabs defaultActiveKey="0" key="services-tabs">
+          {
+            Object.keys(application.subdomains).map((subdomain, index) => {
+              if (application.subdomains[subdomain].services.length === 0) {
+                return null;
+              }
 
-            return (
-              <TabPane tab={subdomain} key={index}>
-                <Table
-                  style={{ width: '100%' }}
-                  pagination={false}
-                  columns={this.columns}
-                  rowKey="id"
-                  // getBodyWrapper={this._getBodyWrapper}
-                  dataSource={application.subdomains[subdomain].services}
-                />
-              </TabPane>
-            );
-          })
-        }
-      </Tabs>
+              return (
+                <TabPane tab={subdomain} key={index}>
+                  <Table
+                    style={{ width: '100%' }}
+                    pagination={false}
+                    columns={this.columns}
+                    rowKey="id"
+                    getBodyWrapper={this._getBodyWrapper}
+                    dataSource={application.subdomains[subdomain].services}
+                  />
+                </TabPane>
+              );
+            })
+          }
+        </Tabs>
+      </QueueAnim>
     );
   }
 }

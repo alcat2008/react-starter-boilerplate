@@ -11,11 +11,11 @@ const routes = {
     {
       path: 'developer',
       component: Developer.Wrapper,
-      indexRoute: { component: Developer.Services },
+      indexRoute: { component: Developer.Basic },
       childRoutes: [
         {
           path: 'application',
-          indexRoute: { component: Developer.Services },
+          indexRoute: { component: Developer.Basic },
           childRoutes: [
             { path: 'basic', component: Developer.Basic },
             { path: 'services', component: Developer.Services },
