@@ -34,10 +34,10 @@ class Developer extends React.Component {
             >
               <SubMenu key="resources" title={<span><Icon type="laptop" />资源管理</span>}>
                 {createLinkMenu('/developer/resources/server', '云服务器')}
-                {createLinkMenu('/developer/resources/mirror', '镜像')}
+                {createLinkMenu('/developer/resources/mirror', '镜像仓库')}
                 {createLinkMenu('/developer/resources/dbs', 'DB Schema')}
                 {createLinkMenu('/developer/resources/repos', '代码托管')}
-                {createLinkMenu('/developer/resources/domain', '域名')}
+                {createLinkMenu('/developer/resources/domain', '域名配置')}
               </SubMenu>
               <SubMenu key="application" title={<span><Icon type="appstore-o" />应用管理</span>}>
                 {createLinkMenu('/developer/application/basic', '基础配置')}

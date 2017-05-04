@@ -18,7 +18,7 @@ const { Step } = Steps;
 // );
 
 
-class Info extends React.Component {
+class ServiceInfo extends React.Component {
   componentDidMount() {
     const { params } = this.props;
     this.props.actions.getInfo(params);
@@ -98,5 +98,5 @@ const mapDispatchToProps = dispatch => ({
   }
 });
 
-export default connect(({ application }) => ({ application }), mapDispatchToProps)(Info);
+export default connect(({ application }) => ({ application }), mapDispatchToProps)(ServiceInfo);
 
