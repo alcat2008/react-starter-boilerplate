@@ -96,7 +96,7 @@ class Flows extends React.Component {
                     pagination={false}
                     columns={this.columns}
                     rowKey="id"
-                    getBodyWrapper={this._getBodyWrapper}
+                    // getBodyWrapper={this._getBodyWrapper}
                     dataSource={application.subdomains[subdomain].services}
                   />
                 </TabPane>

@@ -26,23 +26,10 @@ class Header extends React.Component {
     const { isMode, location, ...restProps } = this.props;
     const currentKey = '/' + location.pathname.split('/')[1];
     const navChildren = [
-      (
-        <MenuItem key="/">
-          <Link to="/">首页</Link>
-        </MenuItem>
-      ), (
-        <MenuItem key="/console">
-          <Link to="/console">控制台</Link>
-        </MenuItem>
-      ), (
-        <MenuItem key="/developer">
-          <Link to="/developer">开发者中心</Link>
-        </MenuItem>
-      ), (
-        <MenuItem key="/materail">
-          <Link to="/materail">文档资料</Link>
-        </MenuItem>
-      ),
+      <MenuItem key="/"><Link to="/">首页</Link></MenuItem>,
+      <MenuItem key="/console">控制台</MenuItem>,
+      <MenuItem key="/developer"><Link to="/developer">开发者中心</Link></MenuItem>,
+      <MenuItem key="/materail">文档资料</MenuItem>,
     ];
 
     const userTitle = (<div>

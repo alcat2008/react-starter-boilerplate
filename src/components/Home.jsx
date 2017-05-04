@@ -44,7 +44,7 @@ class Home extends React.Component {
             key="content"
             id={`${props.id}-contentBlock0`}
           >
-            爱租赁开放平台为您提供极致的开放体验...爱租赁开放平台为您提供极致的开放体验...爱租赁开放平台为您提供极致的开放体验...
+            爱租赁开放平台为您提供极致的开放体验。针对移动互联网场景的定制化 SaaS 云服务，采用 Docker 容器技术封装应用运行环境，并且针对互联网应用提供系统构建、发布、持续集成、运维管理的一站式解决方案。
           </p>
           <Button
             type="ghost"

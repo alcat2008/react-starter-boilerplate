@@ -10,14 +10,15 @@ import { LinkableCard } from '../../layout';
 class DbQuery extends React.Component {
   render() {
     return (
-      <QueueAnim type={['right', 'left']}>
-        <div className="detail" key="detail">
-          <div className="title">数据库服务</div>
+      <QueueAnim type={['right', 'left']} className="description">
+        <div className="title" key="title">数据库服务</div>
+        <div className="digest" key="digest">
+          <p>特别提供针对数据库的可视化查询、分析工具，实时掌握数据库及应用状态。</p>
         </div>
         <QueueAnim className="linkable-container" key="tool" type="bottom" delay={100}>
           <LinkableCard
             key="startup"
-            figure="自定义首页"
+            figure="数据库查询工具"
           />
         </QueueAnim>
       </QueueAnim>

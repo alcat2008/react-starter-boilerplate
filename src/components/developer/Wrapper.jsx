@@ -33,7 +33,7 @@ class Developer extends React.Component {
               style={{ height: '100%' }}
             >
               <SubMenu key="resources" title={<span><Icon type="laptop" />资源管理</span>}>
-                {createLinkMenu('/developer/resources/server', '云服务器')}
+                {/* {createLinkMenu('/developer/resources/server', '云服务器')} */}
                 {createLinkMenu('/developer/resources/mirror', '镜像仓库')}
                 {createLinkMenu('/developer/resources/dbs', 'DB Schema')}
                 {createLinkMenu('/developer/resources/repos', '代码托管')}
