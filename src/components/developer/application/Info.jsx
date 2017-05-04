@@ -31,7 +31,7 @@ class Info extends React.Component {
 
     return (
       <QueueAnim type={['right', 'left']} className="service-info">
-        <div className="service-detail" key="detail">
+        <div className="detail" key="detail">
           <div className="title">{serviceData.comment}</div>
           <p>ID： {serviceData.id}</p>
           <p>模块： {serviceData.subdomain}</p>
@@ -50,7 +50,7 @@ class Info extends React.Component {
             </Steps>
           </Card>
         </div>
-        <QueueAnim className="linkable-container" key="tool" type="bottom">
+        <QueueAnim className="linkable-container" key="tool" type="bottom" delay={100}>
           <LinkableCard
             key="dsl"
             figure="自定义 DSL"

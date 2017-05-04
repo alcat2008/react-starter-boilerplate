@@ -17,7 +17,6 @@ function createLinkMenu(key, value) {
 class Developer extends React.Component {
   render() {
     const { location } = this.props;
-    const openKey = location.pathname.split('/')[2];
     return (
       <Content style={{ padding: '0 50px' }}>
         <Breadcrumb style={{ margin: '12px 0' }}>
@@ -29,8 +28,8 @@ class Developer extends React.Component {
           <Sider width={200} style={{ background: '#fff' }}>
             <Menu
               mode="inline"
-              defaultSelectedKeys={[location.pathname]}
-              defaultOpenKeys={[openKey]}
+              selectedKeys={[location.pathname]}
+              defaultOpenKeys={[location.pathname.split('/')[2]]}
               style={{ height: '100%' }}
             >
               <SubMenu key="resources" title={<span><Icon type="laptop" />资源管理</span>}>
@@ -52,7 +51,7 @@ class Developer extends React.Component {
               </SubMenu>
               <SubMenu key="monitor" title={<span><Icon type="notification" />监控中心</span>}>
                 {createLinkMenu('/developer/monitor/logs', '日志服务')}
-                {createLinkMenu('/developer/monitor/dbs', '数据库')}
+                {createLinkMenu('/developer/monitor/dbquery', '数据库服务')}
               </SubMenu>
             </Menu>
           </Sider>

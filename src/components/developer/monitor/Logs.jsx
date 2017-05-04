@@ -1,26 +1,25 @@
+/**
+ * Created by alcat on 03/05/2017.
+ */
+
 import React from 'react';
 import QueueAnim from 'rc-queue-anim';
 import { LinkableCard } from '../../layout';
 
-class Basic extends React.Component {
+class Logs extends React.Component {
   render() {
     return (
       <QueueAnim type={['right', 'left']}>
         <div className="detail" key="detail">
-          <div className="title">基础配置</div>
+          <div className="title">日志服务</div>
         </div>
         <QueueAnim className="linkable-container" key="tool" type="bottom" delay={100}>
           <LinkableCard
-            key="startup"
-            figure="自定义首页"
-          />
-          <LinkableCard
-            key="protal"
-            figure="自定义门户"
-          />
-          <LinkableCard
-            key="privilege"
-            figure="自定义权限"
+            key="kibana"
+            figure="kibana"
+            detail="对日志进行高效的搜索、可视化、分析等各种操作"
+            href="http://120.26.102.213:5601/"
+            text="查看"
           />
         </QueueAnim>
       </QueueAnim>
@@ -28,4 +27,4 @@ class Basic extends React.Component {
   }
 }
 
-export default Basic;
+export default Logs;

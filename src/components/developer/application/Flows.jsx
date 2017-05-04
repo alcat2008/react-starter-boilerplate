@@ -7,7 +7,7 @@ import QueueAnim from 'rc-queue-anim';
 import TweenOne from 'rc-tween-one';
 import { isEmpty } from 'lodash/lang';
 
-import { getServices } from '../../../actions/application';
+import { getFlows } from '../../../actions/application';
 
 function generateBooleanColumn(title, key) {
   return {
@@ -22,13 +22,9 @@ function generateBooleanColumn(title, key) {
 const TabPane = Tabs.TabPane;
 const TweenOneGroup = TweenOne.TweenOneGroup;
 
-class Services extends React.Component {
+class Flows extends React.Component {
   componentDidMount() {
-    // this.props.actions.getServices()
-    //   .then(response => {
-    //     this.setState({ subdomains: response });
-    //   });
-    this.props.actions.getServices();
+    this.props.actions.getFlows();
   }
 
   columns = [
@@ -86,7 +82,7 @@ class Services extends React.Component {
 
     return (
       <QueueAnim type={['right', 'left']}>
-        <Tabs defaultActiveKey="0" key="services-tabs">
+        <Tabs defaultActiveKey="0" key="flows-tabs">
           {
             Object.keys(application.subdomains).map((subdomain, index) => {
               if (application.subdomains[subdomain].services.length === 0) {
@@ -116,10 +112,10 @@ class Services extends React.Component {
 const mapDispatchToProps = dispatch => ({
   actions: {
     ...bindActionCreators({
-      getServices
+      getFlows
     }, dispatch)
   }
 });
 
-export default connect(({ application }) => ({ application }), mapDispatchToProps)(Services);
+export default connect(({ application }) => ({ application }), mapDispatchToProps)(Flows);
 

@@ -37,7 +37,7 @@ class App extends React.Component {
   }
 
   render() {
-    const { children, location } = this.props;
+    const { children, location, profile } = this.props;
     // if (location && location.pathname === '/home') {
     //   return children;
     // }
@@ -59,7 +59,7 @@ class App extends React.Component {
         <Nav isMode={this.state.isMode} location={location} />
         <div style={{ minHeight: contentHeight }}>
           {React.cloneElement(children, {
-            // profile,
+            profile,
             // subdomains,
             // ...routeActions,
             // isMode: this.state.isMode,
@@ -75,6 +75,7 @@ class App extends React.Component {
 // eslint-disable-next-line arrow-body-style
 const mapStateToProps = state => ({
   routing: state.routing,
+  profile: state.profile,
 });
 
 export default connect(mapStateToProps)(App);
