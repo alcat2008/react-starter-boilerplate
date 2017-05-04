@@ -5,7 +5,7 @@
 import React from 'react';
 import QueueAnim from 'rc-queue-anim';
 import { LinkableCard } from '../../layout';
-
+import config from '../../../config';
 
 class DbQuery extends React.Component {
   render() {
@@ -17,8 +17,18 @@ class DbQuery extends React.Component {
         </div>
         <QueueAnim className="linkable-container" key="tool" type="bottom" delay={100}>
           <LinkableCard
-            key="startup"
-            figure="数据库查询工具"
+            key="mysql"
+            figure="MySQL"
+            detail="MySQL 管理工具"
+            href={config.dbMysql}
+            text="查看"
+          />
+          <LinkableCard
+            key="redis"
+            figure="Redis"
+            href={config.dbRedis}
+            detail="Redis 管理工具"
+            text="查看"
           />
         </QueueAnim>
       </QueueAnim>

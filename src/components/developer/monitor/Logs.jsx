@@ -5,6 +5,7 @@
 import React from 'react';
 import QueueAnim from 'rc-queue-anim';
 import { LinkableCard } from '../../layout';
+import config from '../../../config';
 
 class Logs extends React.Component {
   render() {
@@ -19,7 +20,7 @@ class Logs extends React.Component {
             key="kibana"
             figure="kibana"
             detail="对日志进行高效的搜索、可视化、分析等各种操作"
-            href="http://120.26.102.213:5601/"
+            href={config.logHost}
             text="查看"
           />
         </QueueAnim>

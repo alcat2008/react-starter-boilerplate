@@ -5,6 +5,7 @@
 import React from 'react';
 import QueueAnim from 'rc-queue-anim';
 import { LinkableCard } from '../../layout';
+import config from '../../../config';
 
 class Repos extends React.Component {
   render() {
@@ -19,7 +20,7 @@ class Repos extends React.Component {
             key="gitlab"
             figure="GibLab"
             detail="集代码托管、测试、部署于一体的开源 git 仓库管理软件"
-            href="http://192.168.61.91:18001/"
+            href={config.gitHost}
             text="查看"
           />
         </QueueAnim>

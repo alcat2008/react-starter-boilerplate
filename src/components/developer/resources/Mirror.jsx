@@ -5,6 +5,7 @@
 import React from 'react';
 import QueueAnim from 'rc-queue-anim';
 import { LinkableCard } from '../../layout';
+import config from '../../../config';
 
 class Mirror extends React.Component {
   render() {
@@ -19,7 +20,7 @@ class Mirror extends React.Component {
             key="docker"
             figure="Nexus"
             detail="高效、健壮的仓库管理工具"
-            href="http://192.168.61.91:10001/#browse/search/docker"
+            href={config.mirrorHost}
             text="查看"
           />
         </QueueAnim>

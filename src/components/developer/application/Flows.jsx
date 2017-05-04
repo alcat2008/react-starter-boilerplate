@@ -1,11 +1,12 @@
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
+// import { Link } from 'react-router';
 import { Table, Tabs, Icon } from 'antd';
 import QueueAnim from 'rc-queue-anim';
 import TweenOne from 'rc-tween-one';
 import { isEmpty } from 'lodash/lang';
+import config from '../../../config';
 
 import { getFlows } from '../../../actions/application';
 
@@ -33,7 +34,11 @@ class Flows extends React.Component {
       key: 'serviceName',
       dataIndex: 'serviceName',
       render: (text, record) => (
-        <Link to={'/developer/application/service/' + record.subdomain + '/' + record.id}>{text}</Link>
+        <a
+          href={config.flowHost + '#/' + record.subdomain + '/' + record.id}
+          target="_blank"
+          rel="noopener noreferrer"
+        >{text}</a>
       )
     },
     { title: '主实体',
