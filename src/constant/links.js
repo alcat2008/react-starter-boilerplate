@@ -2,7 +2,7 @@
 export default {
   // scan
   scan: {
-    dsl: 'scan/dsl',
+    dsl: 'scan/dslwp',
     bpm: 'scan/bpm',
   },
 

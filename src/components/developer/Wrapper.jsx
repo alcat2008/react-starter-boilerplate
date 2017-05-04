@@ -15,15 +15,20 @@ function createLinkMenu(key, value) {
 }
 
 class Developer extends React.Component {
+  _renderBreadcrumb = () => {
+    return (
+      <Breadcrumb style={{ margin: '12px 0' }}>
+        <BreadcrumbItem>主页</BreadcrumbItem>
+        <BreadcrumbItem>开发者中心</BreadcrumbItem>
+        <BreadcrumbItem>服务列表</BreadcrumbItem>
+      </Breadcrumb>
+    );
+  }
+
   render() {
     const { location } = this.props;
     return (
       <Content style={{ padding: '0 50px' }}>
-        <Breadcrumb style={{ margin: '12px 0' }}>
-          <BreadcrumbItem>主页</BreadcrumbItem>
-          <BreadcrumbItem>开发者中心</BreadcrumbItem>
-          <BreadcrumbItem>服务列表</BreadcrumbItem>
-        </Breadcrumb>
         <Layout style={{ padding: '24px 0', background: '#fff' }}>
           <Sider width={200} style={{ background: '#fff' }}>
             <Menu

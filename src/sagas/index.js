@@ -1,5 +1,5 @@
 
-import { message } from 'antd';
+// import { message } from 'antd';
 import { call, put, takeEvery } from 'redux-saga/effects';
 import { PFetch } from '../utils/fetch';
 import links from '../constant/links';
@@ -15,7 +15,8 @@ function* errorHandler(func, action) {
   } catch (error) {
     // yield put({ type: types.APP_ERROR, payload: '网络请求失败！' });
     // yield call(delay, 30000);
-    message.error('网络请求失败！');
+    // message.error('网络请求失败！');
+    console.log('网络请求失败！'); // eslint-disable-line
   }
   // yield put({ type: types.APP_LOADING_END });
 }
@@ -26,13 +27,13 @@ function* incrementAsync(action) {
 }
 
 function* getServices() {
-  const subdomains = yield PFetch(links.scan.dsl);
-  yield put({ type: types.SERVICE_LIST, payload: subdomains });
+  const data = yield PFetch(links.scan.dsl);
+  yield put({ type: types.SERVICE_LIST, payload: data });
 }
 
 function* getFlows() {
-  const flows = yield PFetch(links.scan.dsl);
-  yield put({ type: types.SERVICE_FLOW, payload: flows });
+  const data = yield PFetch(links.scan.dsl);
+  yield put({ type: types.SERVICE_FLOW, payload: data });
 }
 
 function* getInfo(action) {

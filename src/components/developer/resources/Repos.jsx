@@ -18,7 +18,7 @@ class Repos extends React.Component {
         <QueueAnim className="linkable-container" key="tool" type="bottom" delay={100}>
           <LinkableCard
             key="gitlab"
-            figure="GibLab"
+            figure="GitLab"
             detail="集代码托管、测试、部署于一体的开源 git 仓库管理软件"
             href={config.gitHost}
             text="查看"

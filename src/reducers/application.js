@@ -5,6 +5,7 @@ const initialState = {
   subdomains: {},
   flows: {},
   info: {},
+  properties: {},
 };
 
 export default function update(state = initialState, action) {
@@ -16,7 +17,8 @@ export default function update(state = initialState, action) {
       // })
       return {
         ...state,
-        subdomains: action.payload
+        subdomains: action.payload.subdomains,
+        properties: action.payload.properties,
       };
     case types.SERVICE_FLOW:
       // const servicesList = [];
@@ -25,7 +27,8 @@ export default function update(state = initialState, action) {
       // })
       return {
         ...state,
-        flows: action.payload
+        flows: action.payload.subdomains,
+        properties: action.payload.properties,
       };
     case types.SERVICE_INFO:
       return {

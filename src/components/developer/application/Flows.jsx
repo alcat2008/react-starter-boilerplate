@@ -90,19 +90,20 @@ class Flows extends React.Component {
         <Tabs defaultActiveKey="0" key="flows-tabs">
           {
             Object.keys(application.subdomains).map((subdomain, index) => {
-              if (application.subdomains[subdomain].services.length === 0) {
+              const finalServices = application.subdomains[subdomain].services.filter(service => service.isWorkflow);
+              if (finalServices.length === 0) {
                 return null;
               }
 
               return (
-                <TabPane tab={subdomain} key={index}>
+                <TabPane tab={application.properties[subdomain].value + ' - ' + subdomain} key={index}>
                   <Table
                     style={{ width: '100%' }}
                     pagination={false}
                     columns={this.columns}
                     rowKey="id"
                     // getBodyWrapper={this._getBodyWrapper}
-                    dataSource={application.subdomains[subdomain].services}
+                    dataSource={finalServices}
                   />
                 </TabPane>
               );

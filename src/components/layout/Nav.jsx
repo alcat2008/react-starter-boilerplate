@@ -62,7 +62,7 @@ class Header extends React.Component {
         id={`${this.props.id}-logo`}
       >
         <Link to="/">
-          <img width="90" height="38" src="/aspace.png" />
+          <img width="90" height="48" src="/aspace.png" />
         </Link>
       </TweenOne>
       {isMode ? (<div

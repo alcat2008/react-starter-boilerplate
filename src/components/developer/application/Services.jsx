@@ -94,7 +94,7 @@ class Services extends React.Component {
               }
 
               return (
-                <TabPane tab={subdomain} key={index}>
+                <TabPane tab={application.properties[subdomain].value + ' - ' + subdomain} key={index}>
                   <Table
                     style={{ width: '100%' }}
                     pagination={false}
