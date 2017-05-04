@@ -3,11 +3,13 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import { browserHistory } from 'react-router';
 import { routerMiddleware } from 'react-router-redux';
-import thunkMiddleware from 'redux-thunk';
-import promiseMiddleware from 'redux-promise';
+import createSagaMiddleware from 'redux-saga';
 
 import rootReducer from '../reducers';
-const middleware = [routerMiddleware(browserHistory), thunkMiddleware, promiseMiddleware];
+import saga from '../sagas/index';
+
+const sagaMiddleware = createSagaMiddleware();
+const middleware = [routerMiddleware(browserHistory), sagaMiddleware];
 
 export default function configureStore(initialState, onComplete: ?() => void) {
   let finalCreateStore;
@@ -36,6 +38,9 @@ export default function configureStore(initialState, onComplete: ?() => void) {
   //     store.replaceReducer(require('../reducers')/*.default if you use Babel 6+ */)
   //   );
   // }
+
+  // Dynamically run saga
+  sagaMiddleware.run(saga);
 
   return store;
 }

@@ -5,7 +5,7 @@ import { Router, browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 
 import configureStore from '../store/configureStore';
-import analytics from '../actions/analytics';
+import analytics from '../service/analytics';
 import routes from '../routes';
 
 const setup = () => {

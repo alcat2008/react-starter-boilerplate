@@ -16,13 +16,14 @@
     "mocha": true
   },
   "rules": {
-    "arrow-parens": ["error", "as-needed"],
-    "arrow-body-style": ["warn", "as-needed", { "requireReturnForObjectLiteral": true }],
+    "arrow-parens": ["off", "as-needed"],
+    "arrow-body-style": ["off", "as-needed", { "requireReturnForObjectLiteral": true }],
     "comma-dangle": ["warn", "only-multiline"],
     "global-require": ["warn"],
     "import/no-unresolved": ["error", { ignore: ['\.img$', '\.png$'] }],
+    "import/prefer-default-export": ["off"],
     "max-len": ["warn", 120, 2],
-    "new-cap": ["error", { "capIsNewExceptions": [ ] }],
+    "new-cap": ["error", { "capIsNewExceptions": ['PFetch'] }],
     "no-param-reassign": ["error", { "props": false }],
     "no-trailing-spaces": ["error", { "skipBlankLines": true }],
     "no-underscore-dangle": ["off", { "allowAfterThis": true }],
@@ -37,7 +38,7 @@
     "react/prefer-stateless-function": ["off"],
     "react/forbid-prop-types": ["off"],
     "react/jsx-pascal-case": ["warn", { ignore: [ ] }],
-    "react/prop-types": ["warn", { ignore: ["children", "style", "params", "routing", "location", "history", "actions"] }],
+    "react/prop-types": ["off", { ignore: ["children", "style", "params", "routing", "location", "history", "actions"] }],
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "jsx-a11y/href-no-hash": ["off"],
   }
