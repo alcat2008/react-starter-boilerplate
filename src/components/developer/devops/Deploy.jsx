@@ -4,8 +4,44 @@
 
 import React from 'react';
 import QueueAnim from 'rc-queue-anim';
+import { Card, Steps, Popover } from 'antd';
+import { LinkableCard } from '../../layout';
+
+const Step = Steps.Step;
 
 class Deploy extends React.Component {
+  _customDot = (dot, { status, index }) => {
+    let content = status;
+    switch (index) {
+      case 0:
+        content = '已完成';
+        break;
+      case 1:
+        content = (
+          <LinkableCard
+            key="deploy"
+            figure="DevOps"
+            detail="一键式自动化部署并提交审核"
+            // href={config.buildHost}
+            text="提交审核"
+          />
+        );
+        break;
+      case 2:
+      case 3:
+        content = '等待中';
+        break;
+      default:
+        content = status;
+    }
+
+    return (
+      <Popover content={<span>步骤 {index}: {content}</span>}>
+        {dot}
+      </Popover>
+    );
+  }
+
   render() {
     return (
       <QueueAnim type={['right', 'left']} className="description">
@@ -24,6 +60,16 @@ class Deploy extends React.Component {
             <li>支持无缝集成流水线，支持流水线执行参数</li>
           </ul>
         </div>
+        <QueueAnim className="linkable-container" key="tool" type="bottom" delay={100}>
+          <Card title="应用状态" style={{ width: '100%' }}>
+            <Steps current={1} progressDot={this._customDot}>
+              <Step title="创建" description="初始化完成" />
+              <Step title="定制中" description="项目进行中" />
+              <Step title="审核中" description="提交审核，等待平台确认" />
+              <Step title="上线" description="集成到主系统" />
+            </Steps>
+          </Card>
+        </QueueAnim>
       </QueueAnim>
     );
   }
