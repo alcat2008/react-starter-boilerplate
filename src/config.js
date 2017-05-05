@@ -1,4 +1,4 @@
-const DEFAULT_IP = window.location.hostname;
+const DEFAULT_IP = window.location.host;
 // const DEFAULT_IP = '127.0.0.1';
 // const DEFAULT_IP = '192.168.64.73';
 
