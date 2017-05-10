@@ -1,4 +1,3 @@
-var path = require('path');
 var autoprefixer = require('autoprefixer');
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -103,7 +102,13 @@ module.exports = {
       {
         exclude: [
           /\.html$/,
-          /\.(js|jsx)$/,
+          // We have to write /\.(js|jsx)(\?.*)?$/ rather than just /\.(js|jsx)$/
+          // because you might change the hot reloading server from the custom one
+          // to Webpack's built-in webpack-dev-server/client?/, which would not
+          // get properly excluded by /\.(js|jsx)$/ because of the query string.
+          // Webpack 2 fixes this, but for now we include this hack.
+          // https://github.com/facebookincubator/create-react-app/issues/1713
+          /\.(js|jsx)(\?.*)?$/,
           /\.css$/,
           /\.less$/,
           /\.json$/,
@@ -139,13 +144,13 @@ module.exports = {
       },
       {
         test: /\.less$/,
-        exclude: path.resolve(__dirname, '../src/styles/views'),
+        exclude: paths.appModularLess,
         loader: 'style!css?sourceMap&importLoaders=2!postcss!less'
       },
       {
         test: /\.less$/,
         // loader: 'style!css?importLoaders=1!postcss!less'
-        include: path.resolve(__dirname, '../src/styles/views'),
+        include: paths.appModularLess,
         loader: 'style!css?sourceMap&modules&localIdentName=[name]_[local]_[hash:base64:3]&importLoaders=2!postcss!less'
       },
       // JSON is not enabled by default in Webpack but both Node and Browserify
