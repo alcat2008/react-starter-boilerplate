@@ -6,7 +6,7 @@ const log = debug('react-starter:analytics');
 
 const analytics = {
   track(pathname) {
-    log('### track ### ', pathname);
+    log('## track ## ', pathname);
   }
 };
 

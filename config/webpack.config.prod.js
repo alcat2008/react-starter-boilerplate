@@ -1,13 +1,13 @@
-var path = require('path');
 var autoprefixer = require('autoprefixer');
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var ManifestPlugin = require('webpack-manifest-plugin');
 var InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
-var url = require('url');
 var paths = require('./paths');
 var getClientEnvironment = require('./env');
+
+
 
 // Webpack uses `publicPath` to determine where the app is being served from.
 // It requires a trailing slash, or the file assets will get an incorrect path.
@@ -83,7 +83,7 @@ module.exports = {
       'react-native': 'react-native-web'
     }
   },
-
+  
   module: {
     // First, run the linter.
     // It's important to do this before Babel processes the JS.
@@ -123,7 +123,7 @@ module.exports = {
         test: /\.(js|jsx)$/,
         include: paths.appSrc,
         loader: 'babel',
-
+        
       },
       // The notation here is somewhat confusing.
       // "postcss" loader applies autoprefixer to our CSS.
@@ -148,7 +148,7 @@ module.exports = {
       },
       {
         test: /\.less$/,
-        exclude: path.resolve(__dirname, '../src/styles/views'),
+        exclude: paths.appModularLess,
         loader: ExtractTextPlugin.extract(
           'style',
           'css?importLoaders=2!postcss!less',
@@ -158,7 +158,7 @@ module.exports = {
       {
         test: /\.less$/,
         // loader: 'style!css?importLoaders=1!postcss!less'
-        include: path.resolve(__dirname, '../src/styles/views'),
+        include: paths.appModularLess,
         loader: ExtractTextPlugin.extract(
           'style',
           'css?modules&localIdentName=[hash:base64:4]&importLoaders=2!postcss!less',
@@ -183,7 +183,7 @@ module.exports = {
       // Remember to add the new extension(s) to the "url" loader exclusion list.
     ]
   },
-
+  
   // We use PostCSS for autoprefixing only.
   postcss: function() {
     return [
@@ -234,7 +234,8 @@ module.exports = {
     new webpack.optimize.UglifyJsPlugin({
       compress: {
         screw_ie8: true, // React doesn't support IE8
-        warnings: false
+        warnings: false,
+        drop_console: true,
       },
       mangle: {
         screw_ie8: true

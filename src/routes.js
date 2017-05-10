@@ -1,5 +1,7 @@
 
-import { App, Home, Foo, SubPage, NotFound } from './components';
+import App from './containers/App';
+import Home from './containers/Home';
+import { Foo, SubPage, NotFound } from './components';
 
 const routes = {
   path: '/',

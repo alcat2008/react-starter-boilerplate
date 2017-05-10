@@ -1,4 +1,4 @@
-import { INCREASE, DECREASE } from '../actions/types';
+import { INCREASE, DECREASE } from '../constant/dictActions';
 
 const initialState = {
   number: 1

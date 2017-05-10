@@ -7,6 +7,6 @@ function* incrementAsync(action) {
   yield put({ type: 'INCREASE', payload: action.payload });
 }
 
-export default function* counterSaga() {
+export default function* sagas() {
   yield takeEvery('INCREASE_ASYNC', incrementAsync);
 }

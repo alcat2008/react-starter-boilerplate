@@ -1,7 +1,7 @@
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { browserHistory } from 'react-router';
+import { Link } from 'react-router';
 import { increase, decrease, increaseAsync } from '../actions/count';
 
 import homeStyle from '../styles/views/home.less';
@@ -13,17 +13,17 @@ class Home extends React.Component {
   };
 
   render() {
-    const { number } = this.props;
+    const { number, actions } = this.props;
     return (
       <div>
         <div className={homeStyle.jump}>
-          <button onClick={() => browserHistory.push('/foo')}>Go to /foo</button>
+          <Link to="/foo">Go to foo</Link>
         </div>
         <div>
           Some state changes:
-          {number}
-          <button onClick={() => this.props.actions.increase(1)}>Increase</button>
-          <button onClick={() => this.props.actions.decrease(1)}>Decrease</button>
+          <span className={homeStyle.count}>{number}</span>
+          <button onClick={() => actions.increase(1)}>Increase</button>
+          <button onClick={() => actions.decrease(1)}>Decrease</button>
           <button onClick={() => this.props.actions.increaseAsync(1)}>Increment async</button>
         </div>
       </div>

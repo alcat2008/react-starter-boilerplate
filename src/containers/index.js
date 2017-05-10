@@ -1,16 +1,16 @@
 
 import React from 'react';
 import { Provider } from 'react-redux';
-import { Router, browserHistory } from 'react-router';
+import { Router, hashHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 
 import configureStore from '../store/configureStore';
-import analytics from '../service/analytics';
+import analytics from '../services/analytics';
 import routes from '../routes';
 
 const setup = () => {
   const store = configureStore({});
-  const history = syncHistoryWithStore(browserHistory, store);
+  const history = syncHistoryWithStore(hashHistory, store);
   history.listen(location => analytics.track(location.pathname));
 
   const AppContainer = () => (
