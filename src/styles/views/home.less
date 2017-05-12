@@ -12,3 +12,26 @@
   color: @legend-color;
   margin: 1rem;
 }
+
+.operator {
+  button {
+    margin: .4em;
+    padding: 1em;
+    cursor: pointer;
+    background: #e1e1e1;
+    text-decoration: none;
+    color: #666;
+    /* Prevent highlight colour when element is tapped */
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+
+    /* Smooth fonts */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    border: none;
+
+    & + button {
+      margin-left: 12px;
+    }
+  }
+}

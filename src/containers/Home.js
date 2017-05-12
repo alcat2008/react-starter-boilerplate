@@ -2,7 +2,7 @@ import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
-import { increase, decrease } from '../actions/count';
+import { increase, decrease, increaseAsync, increaseByRequest } from '../actions/count';
 
 import homeStyle from '../styles/views/home.less';
 
@@ -22,8 +22,12 @@ class Home extends React.Component {
         <div>
           Some state changes:
           <span className={homeStyle.count}>{number}</span>
-          <button onClick={() => actions.increase(1)}>Increase</button>
-          <button onClick={() => actions.decrease(1)}>Decrease</button>
+        </div>
+        <div className={homeStyle.operator}>
+          <button className="btn-hover" onClick={() => actions.increase(1)}>Increase</button>
+          <button className="btn-hover" onClick={() => actions.decrease(1)}>Decrease</button>
+          <button className="btn-hover" onClick={() => actions.increaseAsync(1)}>Increase Async</button>
+          <button className="btn-hover" onClick={() => actions.increaseByRequest(10)}>Increase by Request</button>
         </div>
       </div>
     );
@@ -41,6 +45,8 @@ const mapDispatchToProps = dispatch => ({
     ...bindActionCreators({
       increase,
       decrease,
+      increaseAsync,
+      increaseByRequest,
     }, dispatch)
   }
 });
