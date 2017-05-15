@@ -11,5 +11,14 @@
   "idSelector": false, // Disallow the usage of ID selectors.
   "stringQuotes": false, // All strings should use single quotes since they are often easier to type since the Shift key doesn't need to be pressed.
   "urlFormat": false, // All URLs should be relative.
-  "zeroUnit": false // Zero values should include a unit for consistency with other values.
+  "zeroUnit": false, // Zero values should include a unit for consistency with other values.
+  "spaceAroundComma": {
+    "enabled": true,
+    "allowNewline": true
+  },
+  "decimalZero": {
+    "enabled": false,
+    "style": "none"
+  },
+  "newlineAfterBlock": false
 }
