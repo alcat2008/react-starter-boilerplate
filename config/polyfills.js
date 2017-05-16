@@ -6,6 +6,9 @@ if (typeof Promise === 'undefined') {
   window.Promise = require('promise/lib/es6-extensions.js');
 }
 
+// Provides polyfills necessary for a full ES2015+ environment.
+require('babel-polyfill');
+
 // fetch() polyfill for making API calls.
 require('whatwg-fetch');
 
