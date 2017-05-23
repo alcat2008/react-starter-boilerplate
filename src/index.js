@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import FastClick from 'fastclick';
 
 import AppContainer from './containers';
+import registerServiceWorker from './registerServiceWorker';
 
 function initComponent() {
   ReactDOM.render(
@@ -19,6 +20,4 @@ initComponent();
 // https://github.com/ftlabs/fastclick
 FastClick.attach(document.body);
 
-if (module.hot) {
-  module.hot.accept();
-}
+registerServiceWorker();
