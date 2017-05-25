@@ -12,7 +12,7 @@ const middleware = [routerMiddleware(hashHistory), thunkMiddleware, promiseMiddl
 export default function configureStore(initialState, onComplete: ?() => void) {
   let finalCreateStore;
   let devEnhancer;
-  if (process.env.NODE_ENV === 'production') {
+  if (__PROD__) {
     finalCreateStore = applyMiddleware(...middleware)(createStore);
   } else {
     /* eslint-disable global-require, import/no-extraneous-dependencies */

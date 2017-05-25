@@ -9,8 +9,7 @@ The starter boilerplate is designed to get you up and running with a bunch of aw
 * [react-router-redux](https://github.com/rackt/react-router-redux)
 * [webpack](https://github.com/webpack/webpack)
 * [babel](https://github.com/babel/babel)
-* [koa](https://github.com/koajs/koa)
-* [karma](https://github.com/karma-runner/karma)
+* [express](http://expressjs.com/)
 * [eslint](http://eslint.org)
 
 ## Requirements
@@ -72,22 +71,22 @@ The application structure presented in this boilerplate is **fractal**, where fu
 ├── config                   # Project configuration settings
 │   └── webpack.config.js    # Environment-specific configuration files for webpack
 ├── node_modules             # 3rd-party libraries and utilities
+│── public               # Static files such as favicon.ico etc
+│   ├── favicon.ico      # Application icon to be displayed in bookmarks
+│   ├── robots.txt       # Instructions for search engine crawlers
+│   ├── index.html       # Html templates
+    └── ...              # etc
 ├── server                   # Express application
 │   └── app.js               # Server application entry point
 ├── src                      # Application source code
-│   ├── index.js             # React application entry point
 │   ├── actions              # This list of application actions
 │   ├── components           # Reusable Presentational Components
 │   ├── containers           # Reusable Container Components
-│   │── public               # Static files such as favicon.ico etc
-│   │   ├── favicon.ico      # Application icon to be displayed in bookmarks
-│   │   ├── robots.txt       # Instructions for search engine crawlers
-│   │   ├── index.html       # Html templates
-│   │   └── ...              # etc
 │   ├── reducers             # This list of application reducers
 │   ├── store                # Redux-specific pieces
 │   │   └── configureStore.js# Create and instrument redux store
 │   ├── styles               # Application-wide styles (generally settings)
+│   ├── index.js             # React application entry point
 │   └── routes.js            # Main route definitions and async split points
 │── test                     # Unit and integration tests
 │── .editorconfig            # Defining coding styles
@@ -139,35 +138,6 @@ And then refresh the page.
 
 ## Build System
 
-### Configuration
-
-Default project configuration can be found in `~/config/index.js`. Here you'll be able to redefine your `src` and `dist` directories, adjust compilation settings, tweak your vendor dependencies, and more. For the most part, you should be able to make changes in here **without ever having to touch the actual webpack build configuration**.
-
-If you need environment-specific overrides (useful for dynamically setting API endpoints, for example), you can edit `~/config/environments.js` and define overrides on a per-NODE_ENV basis. There are examples for both `development` and `production`, so use those as guidelines. Here are some common configuration options:
-
-|Key|Description|
-|---|-----------|
-|`dir_src`|application source code base path|
-|`dir_dist`|path to build compiled application to|
-|`server_host`|hostname for the Koa server|
-|`server_port`|port for the Koa server|
-|`compiler_css_modules`|whether or not to enable CSS modules|
-|`compiler_devtool`|what type of source-maps to generate (set to `false`/`null` to disable)|
-|`compiler_vendor`|packages to separate into to the vendor bundle|
-
-
-### Root Resolve
-Webpack is configured to make use of [resolve.root](http://webpack.github.io/docs/configuration.html#resolve-root), which lets you import local packages as if you were traversing from the root of your `~/src` directory. Here's an example:
-
-```js
-// current file: ~/src/views/some/nested/View.js
-// What used to be this:
-import SomeComponent from '../../../components/SomeComponent'
-
-// Can now be this:
-import SomeComponent from 'components/SomeComponent' // Hooray!
-```
-
 ### Globals
 
 These are global variables available to you anywhere in your source code. If you wish to modify them, they can be found as the `globals` key in `~/config/index.js`. When adding new globals, make sure you also add them to `~/.eslintrc`.
@@ -177,17 +147,14 @@ These are global variables available to you anywhere in your source code. If you
 |`process.env.NODE_ENV`|the active `NODE_ENV` when the build started|
 |`__DEV__`|True when `process.env.NODE_ENV` is `development`|
 |`__PROD__`|True when `process.env.NODE_ENV` is `production`|
-|`__TEST__`|True when `process.env.NODE_ENV` is `test`|
-|`__DEBUG__`|True when `process.env.NODE_ENV` is `development` and cli arg `--no_debug` is not set (`npm run dev:no-debug`)|
-|`__BASENAME__`|[history basename option](https://github.com/rackt/history/blob/master/docs/BasenameSupport.md)|
 
 ### Styles
 
-Both `.scss` and `.css` file extensions are supported out of the box and are configured to use [CSS Modules](https://github.com/css-modules/css-modules). After being imported, styles will be processed with [PostCSS](https://github.com/postcss/postcss) for minification and autoprefixing, and will be extracted to a `.css` file during production builds.
+Both `.less` and `.css` file extensions are supported out of the box and are configured to use [CSS Modules](https://github.com/css-modules/css-modules). After being imported, styles will be processed with [PostCSS](https://github.com/postcss/postcss) for minification and autoprefixing, and will be extracted to a `.css` file during production builds.
 
 ### Server
 
-This starter kit comes packaged with an Koa server. It's important to note that the sole purpose of this server is to provide `webpack-dev-middleware` and `webpack-hot-middleware` for hot module replacement. Using a custom Koa app in place of [webpack-dev-server](https://github.com/webpack/webpack-dev-server) makes it easier to extend the starter kit to include functionality such as API's, universal rendering, and more -- all without bloating the base boilerplate.
+This starter kit comes packaged with an Express server. It's important to note that the sole purpose of this server is to provide mock data for web. And is easier to extend the starter kit to include functionality such as API's, universal rendering, and more -- all without bloating the base boilerplate.
 
 ### Production Optimization
 
