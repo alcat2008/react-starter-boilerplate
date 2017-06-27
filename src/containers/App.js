@@ -9,7 +9,7 @@ import appStyle from '../styles/views/app.less';
 
 
 // eslint-disable-next-line react/prefer-stateless-function
-class App extends React.Component {
+export class App extends React.Component {
   render() {
     const { children, ...restProps } = this.props;
     return (

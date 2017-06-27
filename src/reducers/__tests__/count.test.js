@@ -1,14 +1,10 @@
-import expect from 'expect';
-import reducer from '../../src/reducers/count';
+
+import reducer from '../count';
 
 describe('count reducer', () => {
-  let originReducer;
-
-  before(() => {
-    originReducer = {
-      number: 5,
-    };
-  });
+  const originReducer = {
+    number: 5,
+  };
 
   it('should return the initial state', () => {
     const expectedReducer = {

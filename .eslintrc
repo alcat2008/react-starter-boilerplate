@@ -18,12 +18,14 @@
   "globals": {
     "__DEV__": false,
     "__PROD__": false,
+    "expect": false,
   },
   "rules": {
     "arrow-parens": ["error", "as-needed"],
     "arrow-body-style": ["warn", "as-needed", { "requireReturnForObjectLiteral": true }],
     "comma-dangle": ["warn", "only-multiline"],
     "global-require": ["warn"],
+    "import/no-named-as-default": ["off"],
     "import/no-unresolved": ["error", { ignore: ['\.img$', '\.png$'] }],
     "max-len": ["warn", 120, 2],
     "new-cap": ["error", { "capIsNewExceptions": [ ] }],
