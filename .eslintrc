@@ -27,6 +27,7 @@
     "global-require": ["warn"],
     "import/no-named-as-default": ["off"],
     "import/no-unresolved": ["error", { ignore: ['\.img$', '\.png$'] }],
+    "import/no-extraneous-dependencies": ["error", { "devDependencies": ["**/*.test.js"]}],
     "max-len": ["warn", 120, 2],
     "new-cap": ["error", { "capIsNewExceptions": [ ] }],
     "no-param-reassign": ["error", { "props": false }],
