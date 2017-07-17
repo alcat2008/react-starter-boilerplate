@@ -26,6 +26,7 @@
     "comma-dangle": ["warn", "only-multiline"],
     "global-require": ["warn"],
     "import/no-named-as-default": ["off"],
+    "import/prefer-default-export": ["off"],
     "import/no-unresolved": ["error", { ignore: ['\.img$', '\.png$'] }],
     "import/no-extraneous-dependencies": ["error", { "devDependencies": ["**/*.test.js"]}],
     "max-len": ["warn", 120, 2],
@@ -44,7 +45,7 @@
     "react/prefer-stateless-function": ["off"],
     "react/forbid-prop-types": ["off"],
     "react/jsx-pascal-case": ["warn", { ignore: [ ] }],
-    "react/prop-types": ["warn", { ignore: ["children", "style", "params", "routing", "location", "history", "actions"] }],
+    "react/prop-types": ["off"],
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "jsx-a11y/href-no-hash": ["off"],
   }
